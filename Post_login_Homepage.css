@@ -1,0 +1,79 @@
+.login {
+    display: flex;
+}
+#profilesetup{
+    padding-left: 20px;
+}
+#cartsetup{
+    left: 1100px;
+}
+.cartimage{
+    width: 40px;
+}
+.cartbtn1 {
+    height: 40px;
+    width: 60px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding-left: 0px;
+    padding-top: 5px;
+}
+.cart:hover{
+    text-decoration: none;
+}
+.cart:active{
+    text-decoration: none;
+}
+.cart:visited{
+    text-decoration: none;
+}
+.cart:link{
+    text-decoration: none;
+}
+.cartbtn1:hover{
+    color: rgb(189, 189, 192);
+}
+#searchbtn:hover{
+    background-color: rgb(216, 219, 219);
+}
+.catagory1 {
+    text-align: center;
+    padding-top: 50px;
+}
+.catnames1 {
+    display: flex;
+    justify-content: space-evenly;
+}
+.catwithpicture1 {
+    font-weight: bold;
+}
+.catwithpicture1:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+#irongate1 {
+    background-image: url("images/buy_rent.png");
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+    color: white;
+}
+.text1 {
+    position: relative;
+    top: 72px;
+}
+#tools1 {
+    background-image: url("images/sell.jpg");
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+    color: white;
+}
+.text1 #tools1 {
+    position: relative;
+    top: 65px;
+}
+.option{
+    color: rgb(32, 28, 23);
+}
