@@ -83,60 +83,46 @@ header {
     cursor: pointer;
 }
 
-.catagory {
+.catagory1 {
     text-align: center;
     padding-top: 50px;
 }
-
-.catnames {
+.catnames1 {
     display: flex;
     justify-content: space-evenly;
 }
-
-.catwithpicture {
+.catwithpicture1 {
     font-weight: bold;
-    border: 2px solid red;
 }
-
-.catwithpicture:hover {
+.catwithpicture1:hover {
     cursor: pointer;
     text-decoration: none;
 }
-
-#irongate {
-    background-image: url("images/irongate.jpg");
+#irongate1 {
+    background-image: url("images/buy_rent.png");
     background-size: cover;
     height: 200px;
     width: 200px;
     color: white;
 }
-
-.text {
+.text1 {
     position: relative;
     top: 72px;
 }
-
-#tools {
-    background-image: url("images/tools.jpg");
+#tools1 {
+    background-image: url("images/sell.jpg");
     background-size: cover;
     height: 200px;
     width: 200px;
     color: white;
 }
-
-.text #tools {
+.text1 #tools1 {
     position: relative;
     top: 65px;
 }
-
-#furniture {
-    background-image: url("images/furniture.jfif");
-    background-size: cover;
-    height: 200px;
-    width: 200px;
-    color: white;
+.option{
+    color: rgb(32, 28, 23);
 }
-
 .footer-basic {
     padding: 40px 0;
     background-color: #ffffff;

@@ -11,58 +11,35 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="Post_login_Homepage.css">
 </head>
 
 <body>
     <header>
-        <a href="home.html" id="logolink" class="logo">
-            <img src="images/logo.png" alt="" height="50px" width=70px" id="logopic">
+        <a href="Post_login_Homepage.html" id="logolink" class="logo">
+            <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
             <div id="logo">SmiFe</div>
         </a>
         <div class="search">
             <input type="text" placeholder="Search for products, shops and more" id="searchtab">
             <input type="button" value="Search" id="searchbtn">
         </div>
-        <div class="login">
-            <!-- Button trigger modal -->
-            <button type="button" value="LOGIN" id="loginbtn" class="btn btn-primary" data-toggle="modal"
-                data-target="#exampleModal">
-                LOGIN
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="logoinlogin" class="logo">
-                                <img src="images/logo.png" alt="" height="50px" width=70px" id="logopic">
-                                <div id="logo">SmiFe</div>
-                            </div>
-                            <form action="">
-                                <div class="loginput">E-MAIL</div><input type="email" placeholder="Enter E-mail"
-                                    class="loginput" id="loginput">
-                                <div class="loginput">PASSWORD</div><input type="password" placeholder="Enter Password"
-                                    class="loginput" id="loginput">
-                                <div class="loginput" id="loginput"><a href="">Forgot Password?</a></div>
-                                <button type="button" class="loginput" id="loginbutton">LOGIN</button>
-                            </form>
-                            <div id="signup">
-                                Not a member?
-                                <a href="signup.html">Sign up</a>
-                            </div>
-                        </div>
-                    </div>
+        <div class="login" id="cartsetup">
+            <a href="Post_login_Homepage.html">
+                <div class="cart2">
+                    <img src="images/shoping_cart.png" alt="cart" class="cartimage">
                 </div>
-            </div>
-        </div>
+            </a>
+            <a href="Post_login_Homepage.html" class="cart">
+                <div>
+                    <p class="cartbtn1">
+                        Cart
+                    </p>
+                </div>
+            </a>
+            <a href="#" class="cart">
+                <p class="cartbtn1" id="profilesetup">Profile</p>
+            </a>
     </header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -108,7 +85,6 @@
                 </div>
             </a>
         </div>
-    </div>
     </div>
     <hr>
     <div class="footer-basic">
