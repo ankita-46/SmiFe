@@ -1,7 +1,7 @@
 # WEBSTER 2K22
-###Team Name: SmiFe
+### Team Name: SmiFe
 
-###Team Member's Name:
+### Team Member's Name:
 
 - Ankita Verma\
 (https://github.com/ankita-46)
@@ -22,8 +22,8 @@
 -Separate sections according to different categories\
 -Report shop/items
 
-###Tech Stack
-*CLIENT: HTML, CSS, JavaScript
-*BACKEND: NodeJS, Express
+### Tech Stack\
+*CLIENT: HTML, CSS, JavaScript\
+*BACKEND: NodeJS, Express\
 *DATABASE: MongoDB
 
