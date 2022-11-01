@@ -22,8 +22,8 @@
 -Separate sections according to different categories\
 -Report shop/items
 
-### Tech Stack\
-*CLIENT: HTML, CSS, JavaScript\
-*BACKEND: NodeJS, Express\
-*DATABASE: MongoDB
+### Tech Stack
+* CLIENT:  HTML, CSS, JavaScript\
+* BACKEND:  NodeJS, Express\
+* DATABASE:  MongoDB
 
