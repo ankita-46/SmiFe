@@ -1,5 +1,5 @@
 # WEBSTER 2K22
-### Team Name: SmiFe
+### Team Name:  SmiFe
 
 ### Team Member's Name:
 
@@ -14,7 +14,7 @@
 ### Proposed Features:-
 
 -Login/Signup \
--User can have a hybrid profile, where they can add yheir shop and browse items\
+-User can have a hybrid profile, where they can add their shop and browse items\
 -User dashboard where they can add shops/items to their watchlist\
 -User can search, rate and comment about shops and items\
 -User can browse/order/rent/rate from shops\
@@ -23,7 +23,7 @@
 -Report shop/items
 
 ### Tech Stack
-* CLIENT:  HTML, CSS, JavaScript\
-* BACKEND:  NodeJS, Express\
-* DATABASE:  MongoDB
+* Client:  HTML, CSS, JavaScript
+* Backend:  NodeJS, Express
+* Database:  MongoDB
 
