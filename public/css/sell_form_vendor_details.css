@@ -1,0 +1,50 @@
+.header {
+    padding: 0;
+}
+
+.half {
+    width: 48%;
+    margin: .5%;
+}
+
+.adress {
+    width: 97%;
+    margin: 1.5%;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.word {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.word1 {
+    padding-bottom: 10px;
+}
+
+.button {
+    margin-top: 10px;
+    width: 30%;
+}
+
+.heading {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.btn1 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.icons {
+    text-align: center;
+}
+
+.sociallogos {
+    margin: 0.5%;
+}
