@@ -28,7 +28,7 @@ body {
 .signup {
     display: flex;
     justify-content: space-around;
-    margin-top: 193px;
+    margin-top: 8%;
 }
 
 .form {
@@ -38,17 +38,33 @@ body {
     border-radius: 10px;
 }
 
-.input{
-    margin:10px 4px;
+.input {
+    margin: 10px 4px;
+    width: 200px;
+    height: 25px;
 }
 
-.inputform{
-    margin:50px auto;
+.inputform {
+    margin-bottom: 50px;
+    display: grid;
+
 }
-button{
-    margin:auto 10px;
+
+.inputBlocks {
+    display: inline;
+}
+
+.inputBullet {
+    display: inline-block;
+    width: 150px;
+    margin-left: 107px;
+}
+
+button {
+    margin: auto 10px;
     border-radius: 5px;
 }
-button:hover{
+
+button:hover {
     cursor: pointer;
 }

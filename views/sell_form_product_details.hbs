@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sell Here</title>
+    <link rel="icon" href="images/logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/sell_form_product_details.css">
+</head>
+
+<body>
+    <div class="container-fluid header">
+        <div class="row">
+            <div class="col-12">
+                <header>
+                    <a href="home.hbs" id="logolink" class="logo">
+                        <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
+                        <div id="logo">SmiFe</div>
+                    </a>
+                    <div class="search">
+                        <input type="text" placeholder="Search for products, shops and more" id="searchtab">
+                        <input type="button" value="Search" id="searchbtn">
+                    </div>
+                    <div class="login" id="cartsetup">
+                        <a href="home.hbs">
+                            <div class="cart2">
+                                <img src="images/shoping_cart.png" alt="cart" class="cartimage">
+                            </div>
+                        </a>
+                        <a href="home.hbs" class="cart">
+                            <div>
+                                <p class="cartbtn1">
+                                    Cart
+                                </p>
+                            </div>
+                        </a>
+                        <a href="#" class="cart">
+                            <p class="cartbtn1" id="profilesetup">Profile</p>
+                        </a>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h1 class="heading">Product Details</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="image">
+                    <img class="image1" src="images/sell_form_pic.jpg" alt="" width="100%">
+                </div>
+            </div>
+            <div class="col-6 ">
+                <form action="/sell_form_product_details" method="POST" class="form">
+                    <div class="form-group">
+                        <label for="" class="word1">Product Name</label>
+                        <input type="text" name="product_name" class="form-control width-utility"
+                            placeholder="Product Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="word">Price</label>
+                        <input type="number" name="price" min="0" class="form-control width-utility"
+                            placeholder="Price">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="word">About Item</label>
+                        <textarea name="about-item" name="about_item" class="form-control width-utility" rows="5"
+                            placeholder="Type here"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="word">Tags for Search</label>
+                        <input type="text" name="tags" class="form-control width-utility"
+                            placeholder="Tags for Search ( write each tag with a space)">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="word">Product Image</label>
+                        <input type="file" name="image" accept="image/*" class="form-control-file width-utility color">
+                    </div>
+                    <button type="submit" class="button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="parting"></div>
+    <div class="footer-basic footer">
+        <footer>
+            <div class="icons">
+                <a href="https://www.facebook.com/" class="sociallogos" target="_blank"><img
+                        src="images/facebook.png" alt="facebook" width="2.5%"></a>
+                <a href="https://www.instagram.com" class="sociallogos" target="_blank"><img
+                        src="/images/instagram.png" alt="instagram" width="2.5%"></a>
+                <a href="https://www.twitter.com" class="sociallogos" target="_blank"><img
+                        src="images/twitter.png" alt="twitter" width="2.5%"></a>
+                <a href="https://www.linkedin.com" class="sociallogos" target="_blank"><img
+                        src="images/linkedin.png" alt="linkedin" width="2.5%"></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item link"><a href="#">Services</a></li>
+                <li class="list-inline-item link"><a href="#">About</a></li>
+                <li class="list-inline-item link"><a href="#">Terms</a></li>
+                <li class="list-inline-item link"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">SmiFe © 2022</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

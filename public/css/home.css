@@ -1,15 +1,19 @@
 .login {
     display: flex;
 }
-#profilesetup{
+
+#profilesetup {
     padding-left: 20px;
 }
-#cartsetup{
+
+#cartsetup {
     left: 1100px;
 }
-.cartimage{
+
+.cartimage {
     width: 40px;
 }
+
 .cartbtn1 {
     height: 40px;
     width: 60px;
@@ -19,21 +23,35 @@
     padding-left: 0px;
     padding-top: 5px;
 }
-.cart:hover{
+
+.cart:hover {
     text-decoration: none;
 }
-.cart:active{
+
+.cart:active {
     text-decoration: none;
 }
-.cart:visited{
+
+.cart:visited {
     text-decoration: none;
 }
-.cart:link{
+
+.cart:link {
     text-decoration: none;
 }
-.cartbtn1:hover{
+
+.cartbtn1:hover {
     color: rgb(189, 189, 192);
 }
-#searchbtn:hover{
+
+#searchbtn:hover {
     background-color: rgb(216, 219, 219);
+}
+
+.icons {
+    text-align: center;
+}
+
+.sociallogos {
+    margin: 0.5%;
 }

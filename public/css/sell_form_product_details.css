@@ -1,0 +1,78 @@
+body {
+    background-color: black;
+}
+
+.header {
+    margin: 0;
+    padding: 0;
+}
+
+.image {
+    text-align: center;
+}
+
+.width-utility {
+    width: 91%;
+}
+
+.word {
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.word1 {
+    color: white;
+    padding-bottom: 10px;
+}
+
+.button {
+    margin-top: 10px;
+    color: white;
+    width: 30%;
+    margin-left: 0;
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+
+.form {
+    padding-left: 6%;
+}
+
+.heading {
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.icons {
+    text-align: center;
+}
+
+.sociallogos {
+    margin: 0.5%;
+}
+
+.color {
+    color: white;
+}
+
+footer {
+    background-color: black;
+}
+
+.footer {
+    padding: 0px;
+}
+
+.parting {
+    height: 81px;
+    width: 100%;
+    background-color: black;
+}
+
+.link {
+    color: white;
+}

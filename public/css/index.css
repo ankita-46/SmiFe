@@ -87,17 +87,21 @@ header {
     text-align: center;
     padding-top: 50px;
 }
+
 .catnames1 {
     display: flex;
     justify-content: space-evenly;
 }
+
 .catwithpicture1 {
     font-weight: bold;
 }
+
 .catwithpicture1:hover {
     cursor: pointer;
     text-decoration: none;
 }
+
 #irongate1 {
     background-image: url("../images/buy_rent.png");
     background-size: cover;
@@ -105,10 +109,12 @@ header {
     width: 200px;
     color: white;
 }
+
 .text1 {
     position: relative;
     top: 72px;
 }
+
 #tools1 {
     background-image: url("../images/sell.jpg");
     background-size: cover;
@@ -116,13 +122,16 @@ header {
     width: 200px;
     color: white;
 }
+
 .text1 #tools1 {
     position: relative;
     top: 65px;
 }
-.option{
+
+.option {
     color: rgb(32, 28, 23);
 }
+
 .footer-basic {
     padding: 40px 0;
     background-color: #ffffff;
@@ -214,4 +223,12 @@ header {
     text-align: center;
     margin-top: 10px;
     color: black;
+}
+
+.icons {
+    text-align: center;
+}
+
+.sociallogos {
+    margin: 0.5%;
 }
