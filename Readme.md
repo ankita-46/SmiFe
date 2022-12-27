@@ -26,4 +26,3 @@
 * CLIENT:  HTML, CSS, JavaScript\
 * BACKEND:  NodeJS, Express\
 * DATABASE:  MongoDB
-
