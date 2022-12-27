@@ -31,8 +31,13 @@ app.get("/signup", (req, res) => {
 app.get("/", (req, res) => {
     res.render("index")
 });
+app.get("/sell_form_product_details", (req, res) => {
+    res.render("sell_form_product_details")
+});
 
-
+app.get("/sell_form_vendor_details", (req, res) => {
+    res.render("sell_form_vendor_details")
+});
 //Create a new user in our database
 app.post("/signup", async(req, res) => {
     try {
