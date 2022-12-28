@@ -8,8 +8,7 @@ require("./db/conn");
 const User = require("./models/signups");
 const { json } = require("express");
 
-const port = process.env.PORT || 3000;
-
+const port = process.env.PORT || 3000; 
 const static_path = path.join(__dirname, "../public");
 const template_path = path.join(__dirname, "../views");
 
@@ -25,12 +24,15 @@ app.set("views", template_path);
 app.get("/", (req, res)=>{
     res.render("index")
 });
+
+app.get("/login", (req, res) => {
+    res.render("login")
+});
+
 app.get("/signup", (req, res) => {
     res.render("signup")
 });
-app.get("/", (req, res) => {
-    res.render("index")
-});
+
 app.get("/sell_form_product_details", (req, res) => {
     res.render("sell_form_product_details")
 });
@@ -38,7 +40,15 @@ app.get("/sell_form_product_details", (req, res) => {
 app.get("/sell_form_vendor_details", (req, res) => {
     res.render("sell_form_vendor_details")
 });
+
+
+//////////////////////UPDATE IT!!
+app.get("*",(req, res) =>{
+    res.render("error404")
+})
+
 //Create a new user in our database
+
 app.post("/signup", async(req, res) => {
     try {
        const password = req.body.password;
@@ -68,7 +78,10 @@ app.post("/signup", async(req, res) => {
     }
 });
 
-app.post("/", async(req, res) => {
+
+//login
+
+app.post("/login", async(req, res) => {
     try{
 
         const email =req.body.email;

@@ -24,46 +24,14 @@
             <input type="button" value="Search" id="searchbtn">
         </div>
         <div class="login">
-            <!-- Button trigger modal -->
-            <button type="button" value="LOGIN" id="loginbtn" class="btn btn-primary" data-toggle="modal"
-                data-target="#exampleModal">
-                LOGIN
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="logoinlogin" class="logo">
-                                <img src="images/logo.png" alt="" height="50px" width=70px" id="logopic">
-                                <div id="logo">SmiFe</div>
-                            </div>
-                            <form class="form-signin" action="/" method="POST">
-                                <div class="loginput">E-MAIL</div><input type="email" placeholder="Enter E-mail"
-                                    class="loginput" id="loginput">
-                                <div class="loginput">PASSWORD</div><input type="password" placeholder="Enter Password"
-                                    class="loginput" id="loginput">
-                                <div class="loginput" id="loginput"><a href="">Forgot Password?</a></div>
-                                <button type="button" class="loginput" id="loginbutton">LOGIN</button>
-                            </form>
-                            <div id="signup">
-                                Not a member?
-                                <a href="/signup">Sign up</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <!-- Button trigger modal -->
+            <a href="/login">
+                <button type="button" value="LOGIN" id="loginbtn" class="btn">
+                    LOGIN
+                </button>
+            </a>
         </div>
-    </header>
+    </header>  
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

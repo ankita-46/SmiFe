@@ -28,7 +28,7 @@ body {
 .signup {
     display: flex;
     justify-content: space-around;
-    margin-top: 6%;
+    margin-top: 12%;
 }
 
 .form {
@@ -67,4 +67,18 @@ button {
 
 button:hover {
     cursor: pointer;
+}
+
+#loginbtn {
+    width: 200px;
+    margin-top: 10px;
+}
+
+#loginbtn:hover {
+    background-color: rgb(199, 193, 193);
+}
+
+#forgotpass {
+    margin-left: -74px;
+    color: #007BBC;
 }
