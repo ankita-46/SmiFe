@@ -31,6 +31,6 @@ An E-commerce website is created in which blacksmiths of our country can sell an
 -Intergrate a payment gateway
 
 ### Tech Stack
-* CLIENT:  HTML, CSS, JavaScript\
-* BACKEND:  NodeJS, Express\
+* CLIENT:  HTML, CSS, JavaScript
+* BACKEND:  NodeJS, Express
 * DATABASE:  MongoDB
