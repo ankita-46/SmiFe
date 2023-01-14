@@ -1,0 +1,94 @@
+*{
+    box-sizing: border-box;
+}
+.buy{
+    min-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.items{
+    margin: 10px 100px;
+    min-height: 250px;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 18px;
+    display: flex;
+}
+
+.img{
+    margin: 9px;
+}
+
+.about{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    justify-content: space-around;
+}
+
+.hidden{
+    visibility: hidden;
+}
+
+.data{
+    margin:5px 5px;
+}
+
+.content{
+    text-align: justify;
+}
+
+.option{
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.buyoption:hover{
+    opacity: 0.5;
+}
+
+.rentbtn{
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    height: 39px;
+    width: 169px;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+    left:150px;
+}
+
+.rentbtn:hover{
+    opacity: 50%;
+    text-decoration: none;
+}
+.price{
+    display: flex;
+}
+
+.next_prev{
+    background-color: black;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    width: 117px;
+    height: 38px;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+.next_prev:hover{
+    opacity: 50%;
+}
+.reload{
+    text-align: center;
+    margin: 21px
+}

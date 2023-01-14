@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Products</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/buy.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+</head>
+
+<body>
+    <header>
+        <a href="/home" id="logolink" class="logo">
+            <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
+            <div id="logo">SmiFe</div>
+        </a>
+        <div class="search">
+            <input type="text" placeholder="Search for products, shops and more" id="searchtab">
+            <input type="button" value="Search" id="searchbtn">
+        </div>
+        <div class="login" id="cartsetup">
+            <a href="/cart">
+                <div class="cart2">
+                    <img src="/images/shoping_cart.png" alt="cart" class="cartimage">
+                </div>
+            </a>
+            <a href="/cart" class="cart">
+                <div>
+                    <p class="cartbtn1">
+                        Cart
+                    </p>
+                </div>
+            </a>
+            <a href="/profile" class="cart">
+                <p class="cartbtn1" id="profilesetup">Profile</p>
+            </a>
+
+            <a href="/sell_form_vendor_details" class="cart">
+                <p class="cartbtn1" id="sellerbtn">Become a seller</p>
+            </a>
+        </div>
+    </header>
+    <section class="buy">
+        <div class="items" id="one">
+            <img src="images/db/{{img0}}" alt="Product image" height="300px" width="300px" class="img">
+            <div class="about">
+                <h2 class="data" id="check0">
+                    {{product_name0}}
+                </h2>
+                <h4 class="data">
+                    Company: {{company_name0}}
+                </h4>
+                <p class="data content">
+                    {{about_item0}}
+                </p>
+                <p class="hidden">
+                    {{search_tag0}}
+                </p>
+                <div class="price ">
+                    <h2 style="display: inline;">
+                        ₹ {{rate0}}
+                    </h2>
+                    <a href="#">
+                        <button class="rentbtn">Rent at 10% price</button>
+                    </a>
+                </div>
+            </div>
+            <div class="option">
+                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <a href="#" class="buyoption"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
+            </div>
+        </div>
+        <div class="items" id="two">
+            <img src="images/db/{{img1}}" alt="Product image" height="300px" width="300px" class="img">
+            <div class="about">
+                <h2 class="data" id="check1">
+                    {{product_name1}}
+                </h2>
+                <h4 class="data">
+                    Company: {{company_name1}}
+                </h4>
+                <p class="data content">
+                    {{about_item1}}
+                </p>
+                <p class="hidden">
+                    {{search_tag1}}
+                </p>
+                <div class="price ">
+                    <h2 style="display: inline;">
+                        ₹ {{rate1}}
+                    </h2>
+                    <a href="#">
+                        <button class="rentbtn">Rent at 10% price</button>
+                    </a>
+                </div>
+            </div>
+            <div class="option">
+                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <a href="#" class="buyoption"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
+            </div>
+        </div>
+        <div class="items" id="three">
+            <img src="images/db/{{img2}}" alt="Product image" height="300px" width="300px" class="img">
+            <div class="about">
+                <h2 class="data" id="check2">
+                    {{product_name2}}
+                </h2>
+                <h4 class="data">
+                    Company: {{company_name2}}
+                </h4>
+                <p class="data content">
+                    {{about_item2}}
+                </p>
+                <p class="hidden">
+                    {{search_tag2}}
+                </p>
+                <div class="price ">
+                    <h2 style="display: inline;">
+                        ₹ {{rate2}}
+                    </h2>
+                    <a href="#">
+                        <button class="rentbtn">Rent at 10% price</button>
+                    </a>
+                </div>
+            </div>
+            <div class="option">
+                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <a href="#" class="buyoption"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
+            </div>
+        </div>
+        <div class="items" id="four">
+            <img src="images/db/{{img3}}" alt="Product image" height="300px" width="300px" class="img">
+            <div class="about">
+                <h2 class="data" id="check3">
+                    {{product_name3}}
+                </h2>
+                <h4 class="data">
+                    Company: {{company_name3}}
+                </h4>
+                <p class="data content">
+                    {{about_item3}}
+                </p>
+                <p class="hidden">
+                    {{search_tag3}}
+                </p>
+                <div class="price ">
+                    <h2 style="display: inline;">
+                        ₹ {{rate3}}
+                    </h2>
+                    <a href="#">
+                        <button class="rentbtn">Rent at 10% price</button>
+                    </a>
+                </div>
+            </div>
+            <div class="option">
+                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <a href="#" class="buyoption"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
+            </div>
+        </div>
+        <div class="items" id="five">
+            <img src="images/db/{{img4}}" alt="Product image" height="300px" width="300px" class="img">
+            <div class="about">
+                <h2 class="data" id="check4">
+                    {{product_name4}}
+                </h2>
+                <h4 class="data">
+                    Company: {{company_name4}}
+                </h4>
+                <p class="data content">
+                    {{about_item4}}
+                </p>
+                <p class="hidden">
+                    {{search_tag4}}
+                </p>
+                <div class="price ">
+                    <h2 style="display: inline;">
+                        ₹ {{rate4}}
+                    </h2>
+                    <a href="#">
+                        <button class="rentbtn">Rent at 10% price</button>
+                    </a>
+                </div>
+            </div>
+            <div class="option">
+                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <a href="#" class="buyoption"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
+            </div>
+        </div>
+    </section>
+    <div class="reload">
+        <form action="/prev" method="post" style="display: inline;">
+            <button class="next_prev" type="submit">&#xab; Prev</button>
+        </form>
+        <form action="/next" method="post" style="display: inline;">
+            <button class="next_prev" type="submit">Next &#xbb;</button>
+        </form>
+    </div>
+    <hr>
+    <div class="footer-basic">
+        <footer>
+            <div class="icons">
+                <a href="https://www.facebook.com/" class="sociallogos" target="_blank"><img
+                        src="images/facebook.png" alt="facebook" width="2.5%"></a>
+                <a href="https://www.instagram.com" class="sociallogos" target="_blank"><img
+                        src="/images/instagram.png" alt="instagram" width="2.5%"></a>
+                <a href="https://www.twitter.com" class="sociallogos" target="_blank"><img
+                        src="/images/twitter.png" alt="twitter" width="2.5%"></a>
+                <a href="https://www.linkedin.com" class="sociallogos" target="_blank"><img
+                        src="/images/linkedin.png" alt="linkedin" width="2.5%"></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">SmiFe © 2023</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="javascript/buy.js"></script>
+</body>
+
+</html>
