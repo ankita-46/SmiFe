@@ -1,0 +1,77 @@
+.container{
+    width: 80%;
+}
+.profile{
+    padding: 2rem;
+}
+.span{
+    display: inline-block;
+    margin-left: 1rem;
+    margin-top: .5rem;
+    color: blue;
+    cursor: pointer;
+}
+.heading 
+{
+    display: flex;
+    justify-content: center;
+}
+h2{
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+}
+.first-name,.last-name{
+    width: 49%;
+}
+.ageofuser{
+    margin: .5rem 0;
+}
+.age-form{
+    width: 100%;
+}
+.gender-label{
+    margin: .5rem 0;
+}
+.genderofuser{
+    display: flex;
+}
+.form-input{
+    margin-right: .5rem;
+}
+.button-upper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btn{
+    margin: .5rem 0;
+    width: 9rem;
+}
+.email , .phone-no{
+    margin: .5rem 0;
+}
+.adress-section{
+    margin: .5rem 0;
+}
+.submit-button1{
+    display: none;
+}
+.chps{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.password-change{
+    display: none;
+}
+.password-change div{
+    margin-top: 1rem;
+}
+.logout-button{
+    margin-top: 1rem;
+    cursor: pointer;
+}
