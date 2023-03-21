@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
+const IP = require("ip");
 
 const app = express();
 require("./db/conn");
@@ -11,16 +12,19 @@ require("./db/conn");
 const User = require("./models/signups");
 const Product = require("./models/products");
 const Vendor = require("./models/vendor_details");
+const Last = require("./models/lastuser");
 
 const { json } = require("express");
 const { default: mongoose } = require("mongoose");
+const LastUser = require("./models/lastuser");
 
 const port = process.env.PORT || 3000;
 const static_path = path.join(__dirname, "../public");
 const template_path = path.join(__dirname, "../views");
 
 //global variables in use below
-let user;
+const ipAddress = IP.address();
+let user = undefined;
 let i=0;
 let total_products;
 
@@ -33,10 +37,20 @@ app.set("view engine", "hbs");
 app.set("views", template_path);
 
 //all get API
-app.get("/", (req, res) => {
-    user=undefined;
+app.get("/", async(req, res) => {
     i=0;
-    res.render("index")
+    try{
+        if(user==undefined)
+        {
+            user = await Last.findOne({ip:ipAddress});
+            user = await User.findOne({email: user.email});
+        }
+        res.render("home");
+    }
+    catch{
+        user = undefined;
+        res.render("index");
+    }
 });
 
 app.get("/login", (req, res) => {
@@ -221,7 +235,12 @@ app.post("/signups", async (req, res) => {
                 password: req.body.password,
                 confirm_password: req.body.confirm_password
             })
+            const lastu = new Last({
+                email: req.body.email,
+                ip: ipAddress
+            })
             const registered = await registerUser.save();
+            const lu = await lastu.save();
             user = registerUser;
             res.status(201).redirect("home");
         }
@@ -245,6 +264,11 @@ app.post("/login", async (req, res) => {
         const useremail = await User.findOne({ email: email });
 
         if (useremail.password === password) {
+            const lastu = new Last({
+                email: email,
+                ip: ipAddress
+            })
+            const lu = await lastu.save();
             user= useremail;
             res.status(201).redirect("home");
         } else {
