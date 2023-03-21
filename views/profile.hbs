@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+    <header>
+        <a href="/home" id="logolink" class="logo">
+            <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
+            <div id="logo">SmiFe</div>
+        </a>
+        <div class="search">
+            <input type="text" placeholder="Search for products, shops and more" id="searchtab">
+            <input type="button" value="Search" id="searchbtn">
+        </div>
+        <div class="login" id="cartsetup">
+            <a href="/cart">
+                <div class="cart2">
+                    <img src="/images/shoping_cart.png" alt="cart" class="cartimage">
+                </div>
+            </a>
+            <a href="/cart" class="cart">
+                <div>
+                    <p class="cartbtn1">
+                        Cart
+                    </p>
+                </div>
+            </a>
+            <a href="/profile" class="cart">
+                <p class="cartbtn1" id="profilesetup">Profile</p>
+            </a>
+
+            <a href="/sell_form_vendor_details" class="cart">
+                <p class="cartbtn1" id="sellerbtn">Become a seller</p>
+            </a>
+        </div>
+    </header>
+    <div class="full-body">
+        <div class="container">
+            <div class="profile">
+                <div class="personal-information">
+                    <div class="heading">
+                        <h2>Personal Information</h2>
+                        <span class="span" id="span1">Edit</span>
+                    </div>
+                    <form action="/profile" class="personal-form" method="POST">
+                        <div class="top">
+                            <div class="first-name">
+                                {{!-- <label for="First_Name" class="form-label">First Name</label> --}}
+                                <input class="form-control part1" id="First_Name" type="text" placeholder="First Name"
+                                    aria-label="default input example" name="firstname" value="{{firstname}}" disabled>
+                            </div>
+                            <div class="last-name">
+                                {{!-- <label for="Last_Name" class="form-label">Last Name</label> --}}
+                                <input class="form-control part1" id="Last_Name" type="text" placeholder="Last Name"
+                                    aria-label="default input example" name="lastname" value="{{lastname}}" disabled>
+                            </div>
+                        </div>
+                        <div class="ageofuser">
+                            <label for="age" class="form-label">Age</label>
+                            <input class="form-control age-form part1" id="age" type="number" placeholder="age"
+                                aria-label="default input example" name="age" value="{{age}}" disabled>
+                        </div>
+                        <div id="gender_selector" value="{{gender}}"></div>
+                        <div class="gender-label">Gender</div>
+                        <div class="genderofuser">
+                            <div class="form-check form-input">
+                                <input class="form-check-input part1" type="radio" name="gender" id="male" value="male"
+                                    disabled>
+                                <label class="form-check-label" for="male">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check form-input">
+                                <input class="form-check-input part1" type="radio" name="gender" id="female"
+                                    value="female" disabled>
+                                <label class="form-check-label" for="female">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="button-upper">
+                            <button class="submit-button1 btn btn-dark" id="button1" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+                <div class="profile-contact">
+                    <div class="heading">
+                        <h2>Contact Information</h2>
+                        <span class="span" id="span2">Edit</span>
+                    </div>
+                    <form action="/profile" class="contact-form" method="POST">
+                        <div class="email">
+                            <label for="email" class="form-label ">Email Address</label>
+                            <input class="form-control age-form part2" id="email" type="email" placeholder="email"
+                                aria-label="default input example" name="email" value="{{email}}" disabled>
+                        </div>
+                        <div class="phone-no">
+                            <label for="phone" class="form-label">Phone No</label>
+                            <input class="form-control age-form part2" id="phone" type="number" placeholder="Phone no"
+                                aria-label="default input example" name="phone" value="{{phoneno}}" disabled>
+                        </div>
+                        <div class="button-upper">
+                            <button class="submit-button1 btn btn-dark" id="button2" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <hr id="gonna_be_none">
+                <div class="address-related-info" id="address_hide_helper">
+                    <div class="heading">
+                        <h2>Address and Company</h2>
+                        <span class="span" id="span3">Edit</span>
+                    </div>
+                    <form action="/profile" class="address-company" method="POST">
+                        <div class="address-line1 adress-section">
+                            <label for="address-line1" class="form-label ">Address Line 1</label>
+                            <input class="form-control age-form part3" id="address-line1" type="text"
+                                placeholder="Address Line 1" aria-label="default input example" name="address_line1"
+                                value="{{address_line_1}}" disabled>
+                        </div>
+                        <div class="address-line2 adress-section">
+                            <label for="address-line2" class="form-label ">Address Line 2</label>
+                            <input class="form-control age-form part3" id="address-line2" type="text"
+                                placeholder="Address Line 2" aria-label="default input example" name="address_line2"
+                                value="{{address_line_2}}" disabled>
+                        </div>
+                        <div class="city adress-section">
+                            <label for="city" class="form-label ">City</label>
+                            <input class="form-control age-form part3" id="city" type="text" placeholder="City"
+                                aria-label="default input example" name="city" value="{{city}}" disabled>
+                        </div>
+                        <div class="state adress-section">
+                            <label for="state" class="form-label ">State</label>
+                            <input class="form-control age-form part3" id="state" type="text" placeholder="State"
+                                aria-label="default input example" name="state" value="{{state}}" disabled>
+                        </div>
+                        <div class="postalcode adress-section">
+                            <label for="postalcode" class="form-label ">Postal Code</label>
+                            <input class="form-control age-form part3" id="postalcode" type="number"
+                                placeholder="Postal Code" aria-label="default input example" name="postalcode"
+                                value="{{postalcode}}" disabled>
+                        </div>
+                        <div class="company adress-section">
+                            <label for="company" class="form-label ">Company</label>
+                            <input class="form-control age-form part3" id="company" type="text" placeholder="Company"
+                                aria-label="default input example" name="company" value="{{company}}" disabled>
+                        </div>
+                        <div class="button-upper">
+                            <button class="submit-button1 btn btn-dark" id="button3" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="chps" id="chps1"><a href="#password-change1">Change Password</a></div>
+                <div class="password-change" id="password-change1">
+                    <form id="password-change" class="password" action="/profile" method="POST">
+                        <div class="current-password">
+                            <input class="form-control part1" id="current_password" type="password"
+                                placeholder="Current Password" aria-label="default input example"
+                                name="currentpassword">
+                        </div>
+                        <div class="new-password">
+                            <input class="form-control part1" id="new_password" type="password"
+                                placeholder="New Password" aria-label="default input example"
+                                name="newpassword">
+                        </div>
+                        <div class="confirm-password">
+                            <input class="form-control part1" id="confirm_password" type="password"
+                                placeholder="Confirm Password" aria-label="default input example"
+                                name="confirmpassword">
+                        </div>
+                        <div class="button-upper">
+                            <button class="btn btn-dark" id="button4" type="submit">Change</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="logout">
+                    <form action="/profile" method="POST" class="logout1">
+                        <div class="button-upper">
+                            <button id="button5" class="logout-button btn btn-dark" type="submit">logout</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-basic">
+        <footer>
+            <div class="icons">
+                <a href="https://www.facebook.com/" class="sociallogos" target="_blank"><img src="images/facebook.png"
+                        alt="facebook" width="2.5%"></a>
+                <a href="https://www.instagram.com" class="sociallogos" target="_blank"><img src="/images/instagram.png"
+                        alt="instagram" width="2.5%"></a>
+                <a href="https://www.twitter.com" class="sociallogos" target="_blank"><img src="/images/twitter.png"
+                        alt="twitter" width="2.5%"></a>
+                <a href="https://www.linkedin.com" class="sociallogos" target="_blank"><img src="/images/linkedin.png"
+                        alt="linkedin" width="2.5%"></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">SmiFe © 2023</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="javascript/profile.js"></script>
+</body>
+
+</html>
