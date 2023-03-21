@@ -16,21 +16,15 @@ const Last = require("./models/lastuser");
 
 const { json } = require("express");
 const { default: mongoose } = require("mongoose");
-const LastUser = require("./models/lastuser");
 
 const port = process.env.PORT || 3000;
 const static_path = path.join(__dirname, "../public");
 const template_path = path.join(__dirname, "../views");
 
 //global variables in use below
-<<<<<<< HEAD
 const ipAddress = IP.address();
 let user = undefined;
 let i=0;
-=======
-let user;
-let i = 0;
->>>>>>> b39e6348969ccca2141b0c5a22a3b0f01bde47a6
 let total_products;
 
 app.use(bodyParser.json({ extended: true }));
@@ -42,7 +36,6 @@ app.set("view engine", "hbs");
 app.set("views", template_path);
 
 //all get API
-<<<<<<< HEAD
 app.get("/", async(req, res) => {
     i=0;
     try{
@@ -57,12 +50,6 @@ app.get("/", async(req, res) => {
         user = undefined;
         res.render("index");
     }
-=======
-app.get("/", (req, res) => {
-    user = undefined;
-    i = 0;
-    res.render("index")
->>>>>>> b39e6348969ccca2141b0c5a22a3b0f01bde47a6
 });
 
 app.get("/login", (req, res) => {
@@ -88,7 +75,7 @@ app.get("/home", (req, res) => {
     if (user != undefined)
         res.render("home");
     else
-        res.render("error404");
+        res.redirect("index");
 })
 
 app.get("/buy", async (req, res) => {
@@ -211,9 +198,8 @@ app.get("/buy", async (req, res) => {
 
 app.get("/cart", (req, res) => {
     i = 0;
-    res.render("cart")
+    res.render("cart");
 });
-//response of profile page
 
 app.get("/profile", async (req, res) => {
     i = 0;
@@ -304,16 +290,12 @@ app.post("/login", async (req, res) => {
         const useremail = await User.findOne({ email: email });
 
         if (useremail.password === password) {
-<<<<<<< HEAD
             const lastu = new Last({
                 email: email,
                 ip: ipAddress
             })
             const lu = await lastu.save();
             user= useremail;
-=======
-            user = useremail;
->>>>>>> b39e6348969ccca2141b0c5a22a3b0f01bde47a6
             res.status(201).redirect("home");
         } else {
             res.send("<h1>Password are not matching.</h1>");
@@ -440,6 +422,7 @@ app.post("/profile", async (req, res) => {
         }
         else{
             user = undefined;
+            await Last.deleteOne({ip: ipAddress});
             res.render("index");
         }
     } catch (error) {
