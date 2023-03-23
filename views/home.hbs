@@ -20,10 +20,10 @@
             <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
             <div id="logo">SmiFe</div>
         </a>
-        <div class="search">
-            <input type="text" placeholder="Search for products, shops and more" id="searchtab">
-            <input type="button" value="Search" id="searchbtn">
-        </div>
+        <form action="/search" method="POST" class="search">
+            <input type="text" placeholder="Search for products, shops and more" id="searchtab" name="value">
+            <button type="submit" id="searchbtn">Search</button>
+        </form>
         <div class="login" id="cartsetup">
             <a href="/cart">
                 <div class="cart2">
@@ -75,7 +75,7 @@
     <div class="catagory1">
         <h2>Select any catagory</h2>
         <div class="catnames1">
-            <a href="/buy" class="catwithpicture1">
+            <a href="/buyoption" class="catwithpicture1">
                 <div id="irongate1">
                     <h2 class="text1"></h2>
                 </div>

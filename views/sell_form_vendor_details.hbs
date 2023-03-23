@@ -23,10 +23,11 @@
                         <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
                         <div id="logo">SmiFe</div>
                     </a>
-                    <div class="search">
-                        <input type="text" placeholder="Search for products, shops and more" id="searchtab">
-                        <input type="button" value="Search" id="searchbtn">
-                    </div>
+                    <form action="/search" method="POST" class="search">
+                        <input type="text" placeholder="Search for products, shops and more" id="searchtab"
+                            name="value">
+                        <button type="submit" id="searchbtn">Search</button>
+                    </form>
                     <div class="login" id="cartsetup">
                         <a href="/cart">
                             <div class="cart2">
@@ -95,7 +96,8 @@
                         <input type="text" name="address_line1" class="form-control" placeholder="Address">
                     </div>
                     <div class="adress form-group">
-                        <input type="text" name="address_line2" class="form-control" placeholder="Street Address Line 2">
+                        <input type="text" name="address_line2" class="form-control"
+                            placeholder="Street Address Line 2">
                     </div>
                     <div class="adress form-group">
                         <label for="" class="word">Postal/Zip/Pin Code</label>
@@ -114,7 +116,8 @@
                     </div>
                     <div class="adress form-group">
                         <label for="" class="word">Description of service being displayed</label>
-                        <textarea name="details_of_service" rows="6" class="form-control" placeholder="Type here"></textarea>
+                        <textarea name="details_of_service" rows="6" class="form-control"
+                            placeholder="Type here"></textarea>
                     </div>
                     <div class="btn1">
                         <button type="submit" class="btn btn-dark button">Submit</button>
@@ -127,14 +130,14 @@
     <div class="footer-basic">
         <footer>
             <div class="icons">
-                <a href="https://www.facebook.com/" class="sociallogos" target="_blank"><img
-                        src="images/facebook.png" alt="facebook" width="2.5%"></a>
-                <a href="https://www.instagram.com" class="sociallogos" target="_blank"><img
-                        src="/images/instagram.png" alt="instagram" width="2.5%"></a>
-                <a href="https://www.twitter.com" class="sociallogos" target="_blank"><img
-                        src="images/twitter.png" alt="twitter" width="2.5%"></a>
-                <a href="https://www.linkedin.com" class="sociallogos" target="_blank"><img
-                        src="images/linkedin.png" alt="linkedin" width="2.5%"></a>
+                <a href="https://www.facebook.com/" class="sociallogos" target="_blank"><img src="images/facebook.png"
+                        alt="facebook" width="2.5%"></a>
+                <a href="https://www.instagram.com" class="sociallogos" target="_blank"><img src="/images/instagram.png"
+                        alt="instagram" width="2.5%"></a>
+                <a href="https://www.twitter.com" class="sociallogos" target="_blank"><img src="images/twitter.png"
+                        alt="twitter" width="2.5%"></a>
+                <a href="https://www.linkedin.com" class="sociallogos" target="_blank"><img src="images/linkedin.png"
+                        alt="linkedin" width="2.5%"></a>
             </div>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="#">Services</a></li>
