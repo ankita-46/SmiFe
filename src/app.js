@@ -24,7 +24,7 @@ const template_path = path.join(__dirname, "../views");
 const ipAddress = IP.address();
 let user = undefined;
 let i = 0;
-let total_products;
+let total_products = 0;
 let prod = [];
 
 app.use(bodyParser.json({ extended: true }));
@@ -50,186 +50,261 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  if(user==undefined)
   res.render("login");
+  else{
+    res.redirect("home");
+  }
 });
 
 app.get("/signups", (req, res) => {
+  if(user==undefined)
   res.render("signup");
+  else{
+    res.redirect("home");
+  }
 });
 
 app.get("/sell_form_product_details", async (req, res) => {
   i = 0;
-  var vendor = await Vendor.findOne({ email: user.email });
-  if (vendor != null) res.render("sell_form_product_details");
-  else res.redirect("sell_form_vendor_details");
+  try {
+    if (user == undefined) {
+      user = await Last.findOne({ ip: ipAddress });
+      user = await User.findOne({ email: user.email });
+    }
+    var vendor = await Vendor.findOne({ email: user.email });
+    if (vendor != null) res.render("sell_form_product_details");
+    else res.redirect("sell_form_vendor_details");
+  } catch (error) {
+    user = undefined;
+    res.redirect("/");
+  }
 });
 
-app.get("/sell_form_vendor_details", (req, res) => {
+app.get("/sell_form_vendor_details", async (req, res) => {
   i = 0;
-  res.render("sell_form_vendor_details");
+  try {
+    if (user == undefined) {
+      user = await Last.findOne({ ip: ipAddress });
+      user = await User.findOne({ email: user.email });
+    }
+    res.render("sell_form_vendor_details");
+  } catch (error) {
+    user = undefined;
+    res.redirect("/");
+  }
 });
 
-app.get("/home", (req, res) => {
+app.get("/home", async (req, res) => {
   i = 0;
-  if (user != undefined) res.render("home");
-  else res.redirect("/");
+  try {
+    if (user == undefined) {
+      user = await Last.findOne({ ip: ipAddress });
+      user = await User.findOne({ email: user.email });
+    }
+    res.render("home");
+  } catch (error) {
+    user = undefined;
+    res.redirect("/");
+  }
 });
 
 app.get("/buyoption", async (req, res) => {
-  prod = await Product.find();
-  total_products = prod.length;
-  res.redirect("buy");
+  try {
+    if (user == undefined) {
+      user = await Last.findOne({ ip: ipAddress });
+      user = await User.findOne({ email: user.email });
+    }
+    prod = await Product.find();
+    total_products = prod.length;
+    res.redirect("buy");
+  } catch (error) {
+    user = undefined;
+    res.redirect("/");
+  }
 });
 
 app.get("/buy", async (req, res) => {
-  let values;
-  if (i == total_products - 1) {
-    values = {
-      img0: prod[i + 0].image,
-      product_name0: prod[i + 0].product_name,
-      company_name0: prod[i + 0].company,
-      about_item0: prod[i + 0].about_item,
-      search_tag0: prod[i + 0].tags,
-      rate0: prod[i + 0].price,
-    };
-  } else if (i == total_products - 2) {
-    values = {
-      img0: prod[i + 0].image,
-      product_name0: prod[i + 0].product_name,
-      company_name0: prod[i + 0].company,
-      about_item0: prod[i + 0].about_item,
-      search_tag0: prod[i + 0].tags,
-      rate0: prod[i + 0].price,
-      img1: prod[i + 1].image,
-      product_name1: prod[i + 1].product_name,
-      company_name1: prod[i + 1].company,
-      about_item1: prod[i + 1].about_item,
-      search_tag1: [i + 1].tags,
-      rate1: prod[i + 1].price,
-    };
-  } else if (i == total_products - 3) {
-    values = {
-      img0: prod[i + 0].image,
-      product_name0: prod[i + 0].product_name,
-      company_name0: prod[i + 0].company,
-      about_item0: prod[i + 0].about_item,
-      search_tag0: prod[i + 0].tags,
-      rate0: prod[i + 0].price,
-      img1: prod[i + 1].image,
-      product_name1: prod[i + 1].product_name,
-      company_name1: prod[i + 1].company,
-      about_item1: prod[i + 1].about_item,
-      search_tag1: [i + 1].tags,
-      rate1: prod[i + 1].price,
-      img2: prod[i + 2].image,
-      product_name2: prod[i + 2].product_name,
-      company_name2: prod[i + 2].company,
-      about_item2: prod[i + 2].about_item,
-      search_tag2: prod[i + 2].tags,
-      rate2: prod[i + 2].price,
-    };
-  } else if (i == total_products - 4) {
-    values = {
-      img0: prod[i + 0].image,
-      product_name0: prod[i + 0].product_name,
-      company_name0: prod[i + 0].company,
-      about_item0: prod[i + 0].about_item,
-      search_tag0: prod[i + 0].tags,
-      rate0: prod[i + 0].price,
-      img1: prod[i + 1].image,
-      product_name1: prod[i + 1].product_name,
-      company_name1: prod[i + 1].company,
-      about_item1: prod[i + 1].about_item,
-      search_tag1: [i + 1].tags,
-      rate1: prod[i + 1].price,
-      img2: prod[i + 2].image,
-      product_name2: prod[i + 2].product_name,
-      company_name2: prod[i + 2].company,
-      about_item2: prod[i + 2].about_item,
-      search_tag2: prod[i + 2].tags,
-      rate2: prod[i + 2].price,
-      img3: prod[i + 3].image,
-      product_name3: prod[i + 3].product_name,
-      company_name3: prod[i + 3].company,
-      about_item3: prod[i + 3].about_item,
-      search_tag3: prod[i + 3].tags,
-      rate3: prod[i + 3].price,
-    };
+  if (user == undefined) {
+    user = await Last.findOne({ ip: ipAddress });
+    if (user == null) {
+      res.redirect("/");
+    } else {
+      user = await User.findOne({ email: user.email });
+      if (total_products == 0) res.redirect("buyoption");
+      else {
+        res.redirect("buy");
+      }
+    }
   } else {
-    values = {
-      img0: prod[i + 0].image,
-      product_name0: prod[i + 0].product_name,
-      company_name0: prod[i + 0].company,
-      about_item0: prod[i + 0].about_item,
-      search_tag0: prod[i + 0].tags,
-      rate0: prod[i + 0].price,
-      img1: prod[i + 1].image,
-      product_name1: prod[i + 1].product_name,
-      company_name1: prod[i + 1].company,
-      about_item1: prod[i + 1].about_item,
-      search_tag1: [i + 1].tags,
-      rate1: prod[i + 1].price,
-      img2: prod[i + 2].image,
-      product_name2: prod[i + 2].product_name,
-      company_name2: prod[i + 2].company,
-      about_item2: prod[i + 2].about_item,
-      search_tag2: prod[i + 2].tags,
-      rate2: prod[i + 2].price,
-      img3: prod[i + 3].image,
-      product_name3: prod[i + 3].product_name,
-      company_name3: prod[i + 3].company,
-      about_item3: prod[i + 3].about_item,
-      search_tag3: prod[i + 3].tags,
-      rate3: prod[i + 3].price,
-      img4: prod[i + 4].image,
-      product_name4: prod[i + 4].product_name,
-      company_name4: prod[i + 4].company,
-      about_item4: prod[i + 4].about_item,
-      search_tag4: prod[i + 4].tags,
-      rate4: prod[i + 4].price,
-    };
+    let values;
+    if (i == total_products - 1) {
+      values = {
+        img0: prod[i + 0].image,
+        product_name0: prod[i + 0].product_name,
+        company_name0: prod[i + 0].company,
+        about_item0: prod[i + 0].about_item,
+        search_tag0: prod[i + 0].tags,
+        rate0: prod[i + 0].price,
+      };
+    } else if (i == total_products - 2) {
+      values = {
+        img0: prod[i + 0].image,
+        product_name0: prod[i + 0].product_name,
+        company_name0: prod[i + 0].company,
+        about_item0: prod[i + 0].about_item,
+        search_tag0: prod[i + 0].tags,
+        rate0: prod[i + 0].price,
+        img1: prod[i + 1].image,
+        product_name1: prod[i + 1].product_name,
+        company_name1: prod[i + 1].company,
+        about_item1: prod[i + 1].about_item,
+        search_tag1: [i + 1].tags,
+        rate1: prod[i + 1].price,
+      };
+    } else if (i == total_products - 3) {
+      values = {
+        img0: prod[i + 0].image,
+        product_name0: prod[i + 0].product_name,
+        company_name0: prod[i + 0].company,
+        about_item0: prod[i + 0].about_item,
+        search_tag0: prod[i + 0].tags,
+        rate0: prod[i + 0].price,
+        img1: prod[i + 1].image,
+        product_name1: prod[i + 1].product_name,
+        company_name1: prod[i + 1].company,
+        about_item1: prod[i + 1].about_item,
+        search_tag1: [i + 1].tags,
+        rate1: prod[i + 1].price,
+        img2: prod[i + 2].image,
+        product_name2: prod[i + 2].product_name,
+        company_name2: prod[i + 2].company,
+        about_item2: prod[i + 2].about_item,
+        search_tag2: prod[i + 2].tags,
+        rate2: prod[i + 2].price,
+      };
+    } else if (i == total_products - 4) {
+      values = {
+        img0: prod[i + 0].image,
+        product_name0: prod[i + 0].product_name,
+        company_name0: prod[i + 0].company,
+        about_item0: prod[i + 0].about_item,
+        search_tag0: prod[i + 0].tags,
+        rate0: prod[i + 0].price,
+        img1: prod[i + 1].image,
+        product_name1: prod[i + 1].product_name,
+        company_name1: prod[i + 1].company,
+        about_item1: prod[i + 1].about_item,
+        search_tag1: [i + 1].tags,
+        rate1: prod[i + 1].price,
+        img2: prod[i + 2].image,
+        product_name2: prod[i + 2].product_name,
+        company_name2: prod[i + 2].company,
+        about_item2: prod[i + 2].about_item,
+        search_tag2: prod[i + 2].tags,
+        rate2: prod[i + 2].price,
+        img3: prod[i + 3].image,
+        product_name3: prod[i + 3].product_name,
+        company_name3: prod[i + 3].company,
+        about_item3: prod[i + 3].about_item,
+        search_tag3: prod[i + 3].tags,
+        rate3: prod[i + 3].price,
+      };
+    } else {
+      values = {
+        img0: prod[i + 0].image,
+        product_name0: prod[i + 0].product_name,
+        company_name0: prod[i + 0].company,
+        about_item0: prod[i + 0].about_item,
+        search_tag0: prod[i + 0].tags,
+        rate0: prod[i + 0].price,
+        img1: prod[i + 1].image,
+        product_name1: prod[i + 1].product_name,
+        company_name1: prod[i + 1].company,
+        about_item1: prod[i + 1].about_item,
+        search_tag1: [i + 1].tags,
+        rate1: prod[i + 1].price,
+        img2: prod[i + 2].image,
+        product_name2: prod[i + 2].product_name,
+        company_name2: prod[i + 2].company,
+        about_item2: prod[i + 2].about_item,
+        search_tag2: prod[i + 2].tags,
+        rate2: prod[i + 2].price,
+        img3: prod[i + 3].image,
+        product_name3: prod[i + 3].product_name,
+        company_name3: prod[i + 3].company,
+        about_item3: prod[i + 3].about_item,
+        search_tag3: prod[i + 3].tags,
+        rate3: prod[i + 3].price,
+        img4: prod[i + 4].image,
+        product_name4: prod[i + 4].product_name,
+        company_name4: prod[i + 4].company,
+        about_item4: prod[i + 4].about_item,
+        search_tag4: prod[i + 4].tags,
+        rate4: prod[i + 4].price,
+      };
+    }
+    res.render("buy", values);
   }
-  res.render("buy", values);
 });
 
-app.get("/cart", (req, res) => {
+app.get("/cart", async (req, res) => {
   i = 0;
-  res.render("cart");
+  try {
+    if (user == undefined) {
+      user = await Last.findOne({ ip: ipAddress });
+      user = await User.findOne({ email: user.email });
+    }
+    res.render("cart");
+  } catch (error) {
+    user = undefined;
+    res.redirect("/");
+  }
 });
 
 app.get("/profile", async (req, res) => {
   i = 0;
-  let vendor1 = await Vendor.findOne({ email: user.email });
-  let profile_object;
-  if (vendor1 == null) {
-    profile_object = {
-      firstname: user.first_name,
-      lastname: user.last_name,
-      age: user.age,
-      email: user.email,
-      gender: user.gender,
-      phoneno: user.phone,
-    };
-  } else {
-    profile_object = {
-      firstname: user.first_name,
-      lastname: user.last_name,
-      age: user.age,
-      email: user.email,
-      gender: user.gender,
-      phoneno: user.phone,
-      address_line_2: vendor1.address_line2,
-      address_line_1: vendor1.address_line1,
-      state: vendor1.state,
-      city: vendor1.city,
-      postalcode: vendor1.postal_code,
-      company: vendor1.company,
-    };
+  try {
+    if (user == undefined) {
+      user = await Last.findOne({ ip: ipAddress });
+      user = await User.findOne({ email: user.email });
+    } if(user!=undefined) {
+      let vendor1 = await Vendor.findOne({ email: user.email });
+      let profile_object;
+      if (vendor1 == null) {
+        profile_object = {
+          firstname: user.first_name,
+          lastname: user.last_name,
+          age: user.age,
+          email: user.email,
+          gender: user.gender,
+          phoneno: user.phone,
+        };
+      } else {
+        profile_object = {
+          firstname: user.first_name,
+          lastname: user.last_name,
+          age: user.age,
+          email: user.email,
+          gender: user.gender,
+          phoneno: user.phone,
+          address_line_2: vendor1.address_line2,
+          address_line_1: vendor1.address_line1,
+          state: vendor1.state,
+          city: vendor1.city,
+          postalcode: vendor1.postal_code,
+          company: vendor1.company,
+        };
+      }
+      res.render("profile", profile_object);
+    }
+  } catch (error) {
+    user = undefined;
+    res.redirect("/");
   }
-  res.render("profile", profile_object);
 });
 
-app.get("/forgotpassword", (req, res) => {
+app.get("/forgotpassword", async (req, res) => {
   res.render("forgotpassword");
 });
 
@@ -265,7 +340,7 @@ app.post("/signups", async (req, res) => {
       user = registerUser;
       res.status(201).redirect("home");
     } else {
-      res.send("<h1>Password are not matching.</h1>");
+      res.redirect("signups");
     }
   } catch (error) {
     res.status(400).send(error);
@@ -290,10 +365,10 @@ app.post("/login", async (req, res) => {
       user = useremail;
       res.status(201).redirect("home");
     } else {
-      res.send("<h1>Password are not matching.</h1>");
+      res.render("login", { show: "Invalid password" });
     }
   } catch (error) {
-    res.status(400).send("<h1>invalid email</h1>");
+    res.render("login", { show: "Invalid email" });
   }
 });
 
@@ -416,10 +491,10 @@ app.post("/profile", async (req, res) => {
           user.password = newpassword;
           res.redirect("profile");
         } else {
-          res.send("confirm password is different from new password");
+          res.redirect("profile");
         }
       } else {
-        res.send("wrong current password");
+        res.render("profile", { show: "Invalid current password" });
       }
     } else {
       user = undefined;
@@ -436,8 +511,7 @@ app.post("/search", async (req, res) => {
   const regex = new RegExp(word, "i");
   prod = await Product.find({ tags: { $regex: regex } });
   total_products = prod.length;
-  if(total_products==0)
-  res.redirect("home");
+  if (total_products == 0) res.redirect("home");
   else res.redirect("buy");
 });
 

@@ -41,10 +41,10 @@
             <a href="/profile" class="cart">
                 <p class="cartbtn1" id="profilesetup">Profile</p>
             </a>
-
-            <a href="/sell_form_vendor_details" class="cart">
+            {{!-- become a seller option --}}
+            {{!-- <a href="/sell_form_vendor_details" class="cart">
                 <p class="cartbtn1" id="sellerbtn">Become a seller</p>
-            </a>
+            </a> --}}
         </div>
     </header>
     <div class="full-body">
@@ -163,7 +163,8 @@
                         </div>
                     </form>
                 </div>
-                <div class="chps" id="chps1"><a href="#password-change1">Change Password</a></div>
+                <div class="chps" id="chps1"><a href="#password-change1" onclick="hide()">Change Password</a></div>
+                <div style="color: red; text-align:center;" id="showwarn">{{show}}</div>
                 <div class="password-change" id="password-change1">
                     <form id="password-change" class="password" action="/profile" method="POST">
                         <div class="current-password">
@@ -174,13 +175,14 @@
                         <div class="new-password">
                             <input class="form-control part1" id="new_password" type="password"
                                 placeholder="New Password" aria-label="default input example"
-                                name="newpassword">
+                                name="newpassword" onkeyup="verify()">
                         </div>
                         <div class="confirm-password">
                             <input class="form-control part1" id="confirm_password" type="password"
                                 placeholder="Confirm Password" aria-label="default input example"
-                                name="confirmpassword">
+                                name="confirmpassword" onkeyup="verify()">
                         </div>
+                        <div style="text-align: center;" id="warning"></div>
                         <div class="button-upper">
                             <button class="btn btn-dark" id="button4" type="submit">Change</button>
                         </div>

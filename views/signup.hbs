@@ -31,9 +31,10 @@
 
                 <div class="inputBlocks"><input type="number" name="phone" class="input" placeholder="Mobile"></div>
                 <div class="inputBlocks"><input type="email" name="email" class="input" placeholder="E-mail"></div>
-                <div class="inputBlocks"><input type="password" name="password" class="input" placeholder="Password"></div>
-                <div class="inputBlocks"><input type="password" name="confirm_password" class="input" placeholder="Confirm Password"></div>
-                <div class="inputBlocks"><button type="submit">Submit</button> <button type="reset">Reset</button></div>
+                <div class="inputBlocks"><input type="password" name="password" class="input" placeholder="Password" id="pass" onkeyup="verify()"></div>
+                <div class="inputBlocks"><input type="password" name="confirm_password" class="input" placeholder="Confirm Password" onkeyup="verify()" id="confirmpass"></div>
+                <div id="warning"></div>
+                <div class="inputBlocks"><button type="submit" id = "submitBtn" >Submit</button> <button type="reset">Reset</button></div>
             </form>
         </div>
     </div>
@@ -49,7 +50,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
         
-
+    <script src="javascript/signup.js"></script>
 
        
 </body>

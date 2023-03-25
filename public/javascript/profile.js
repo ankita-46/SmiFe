@@ -49,3 +49,21 @@ element4.addEventListener("click",function(){
     element4.style.display = "none";
     element5.style.display = "block";
 })
+
+function hide(){
+    document.getElementById("showwarn").innerText="";
+}
+
+function verify(){
+    var newpass= document.getElementById("new_password");
+    var conPass= document.getElementById("confirm_password");
+    var warning= document.getElementById("warning");
+    if(newpass.value!=conPass.value)
+    {
+        warning.innerHTML="<p style='color: red;'>New password and confirm password are not matching.</p>";
+    }
+    else
+    {
+        warning.innerHTML="";
+    }
+}
