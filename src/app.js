@@ -50,17 +50,15 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  if(user==undefined)
-  res.render("login");
-  else{
+  if (user == undefined) res.render("login");
+  else {
     res.redirect("home");
   }
 });
 
 app.get("/signups", (req, res) => {
-  if(user==undefined)
-  res.render("signup");
-  else{
+  if (user == undefined) res.render("signup");
+  else {
     res.redirect("home");
   }
 });
@@ -268,7 +266,8 @@ app.get("/profile", async (req, res) => {
     if (user == undefined) {
       user = await Last.findOne({ ip: ipAddress });
       user = await User.findOne({ email: user.email });
-    } if(user!=undefined) {
+    }
+    if (user != undefined) {
       let vendor1 = await Vendor.findOne({ email: user.email });
       let profile_object;
       if (vendor1 == null) {
@@ -308,6 +307,15 @@ app.get("/forgotpassword", async (req, res) => {
   res.render("forgotpassword");
 });
 
+app.get("/logout", async (req, res) => {
+  user = undefined;
+  try{
+    await Last.deleteOne({ ip: ipAddress });
+  }
+  catch(error){
+  }
+  res.redirect("/");
+});
 //////////////////////UPDATE IT!!
 //app.get("*",(req, res) =>{
 //   res.render("error404")

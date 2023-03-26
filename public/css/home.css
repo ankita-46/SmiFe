@@ -57,11 +57,7 @@
 }
 
 #sellerbtn{
-    width: 123px;
+    width: 61px;
     margin-left: 50px;
-    padding: 4px;
-    background-color: rgb(88, 84, 84);
-    border: 2px solid white;
-    border-radius: 12px;
-    height: 37px;
+    padding: 6px
 }
