@@ -50,17 +50,21 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/login", (req, res) => {
-  if (user == undefined)
-    res.render("login");
-  else {
+app.get("/login", async (req, res) => {
+  try {
+    if (user == undefined) {
+      user = await Last.findOne({ ip: ipAddress });
+      user = await User.findOne({ email: user.email });
+    }
     res.redirect("home");
+  } catch (error) {
+    user = undefined;
+    res.render("login");
   }
 });
 
 app.get("/signups", (req, res) => {
-  if (user == undefined)
-    res.render("signup");
+  if (user == undefined) res.render("signup");
   else {
     res.redirect("home");
   }
@@ -278,7 +282,8 @@ app.get("/profile", async (req, res) => {
     if (user == undefined) {
       user = await Last.findOne({ ip: ipAddress });
       user = await User.findOne({ email: user.email });
-    } if (user != undefined) {
+    }
+    if (user != undefined) {
       let vendor1 = await Vendor.findOne({ email: user.email });
       let profile_object;
       if (vendor1 == null) {
@@ -318,7 +323,13 @@ app.get("/forgotpassword", async (req, res) => {
   res.render("forgotpassword");
 });
 
-
+app.get("/logout", async (req, res) => {
+  user = undefined;
+  try {
+    await Last.deleteOne({ ip: ipAddress });
+  } catch (error) { }
+  res.redirect("/");
+});
 //////////////////////UPDATE IT!!
 //app.get("*",(req, res) =>{
 //   res.render("error404")
@@ -526,54 +537,50 @@ app.post("/search", async (req, res) => {
   else res.redirect("buy");
 });
 
-app.post('/buy',async function (req, res) {
+app.post('/buy', async function (req, res) {
   let data = req.body;
-  if(req.body.productname)
-  {
+  if (req.body.productname) {
     let pr = req.body.productname;
-    let checkforprod = await cartProduct.find({product_name:pr});
-    if(checkforprod.length)
-    {
-        let updatedproducts = await cartProduct.updateMany({product_name:pr},{ $inc: { count: 1} });
+    let checkforprod = await cartProduct.find({ product_name: pr });
+    if (checkforprod.length) {
+      let updatedproducts = await cartProduct.updateMany({ product_name: pr }, { $inc: { count: 1 } });
     }
-    else{
-        let productstobeinserted = await Product.find({product_name:pr});
-        const prod = new cartProduct({
-          email:user.email,
-          product_name: productstobeinserted[0].product_name,
-          company:productstobeinserted[0].company,
-          price:productstobeinserted[0].price,
-          about_item:productstobeinserted[0].about_item,
-          tags:productstobeinserted[0].tags,
-          image:productstobeinserted[0].image,
-          count:1
-        });
-        const insertedproducts = await prod.save();
+    else {
+      let productstobeinserted = await Product.find({ product_name: pr });
+      const prod = new cartProduct({
+        email: user.email,
+        product_name: productstobeinserted[0].product_name,
+        company: productstobeinserted[0].company,
+        price: productstobeinserted[0].price,
+        about_item: productstobeinserted[0].about_item,
+        tags: productstobeinserted[0].tags,
+        image: productstobeinserted[0].image,
+        count: 1
+      });
+      const insertedproducts = await prod.save();
     }
     res.json({
       message: "added to cart",
       data: data
     });
   }
-  else{
+  else {
     res.json({
-      message:"no item added to cart"
+      message: "no item added to cart"
     });
   }
 })
 
-app.post('/removefromcart',async function(req,res)
-{
+app.post('/removefromcart', async function (req, res) {
   // console.log(req.body);
-  let obj = await cartProduct.findOne({_id:req.body.productid});
-  if(obj.count==1)
-  {
-    let deletedobj = await cartProduct.findOneAndDelete({_id:req.body.productid});
+  let obj = await cartProduct.findOne({ _id: req.body.productid });
+  if (obj.count == 1) {
+    let deletedobj = await cartProduct.findOneAndDelete({ _id: req.body.productid });
     res.redirect("cart");
     // console.log(deletedobj);
   }
-  else{
-    let updatedobj = await cartProduct.updateOne({_id:req.body.productid},{ $inc: { count: -1} })
+  else {
+    let updatedobj = await cartProduct.updateOne({ _id: req.body.productid }, { $inc: { count: -1 } })
     res.redirect("cart");
   }
 })

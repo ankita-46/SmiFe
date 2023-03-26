@@ -25,12 +25,10 @@
             <button type="submit" id="searchbtn">Search</button>
         </form>
         <div class="login" id="cartsetup">
-            <a href="/cart">
+            <a href="/cart" class="cart">
                 <div class="cart2">
                     <img src="/images/shoping_cart.png" alt="cart" class="cartimage">
                 </div>
-            </a>
-            <a href="/cart" class="cart">
                 <div>
                     <p class="cartbtn1">
                         Cart
@@ -40,10 +38,9 @@
             <a href="/profile" class="cart">
                 <p class="cartbtn1" id="profilesetup">Profile</p>
             </a>
-            {{!-- become a seller option --}}
-            {{!-- <a href="/sell_form_vendor_details" class="cart">
-                <p class="cartbtn1" id="sellerbtn">Become a seller</p>
-            </a> --}}
+            <a href="/logout" class="cart">
+                <p class="cartbtn1" id="sellerbtn">Logout</p>
+            </a>
         </div>
     </header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

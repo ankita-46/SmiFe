@@ -32,10 +32,12 @@ body {
 }
 
 .form {
+    box-sizing: border-box;
     background-color: rgb(245, 245, 245);
     text-align: center;
     width: 450px;
     border-radius: 10px;
+    height: 30rem;
 }
 
 .input {
