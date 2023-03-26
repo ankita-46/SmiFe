@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Products</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/buy.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+</head>
+
+<body>
+    <header>
+        <a href="/home" id="logolink" class="logo">
+            <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
+            <div id="logo">SmiFe</div>
+        </a>
+        <form action="/search" method="POST" class="search">
+            <input type="text" placeholder="Search for products, shops and more" id="searchtab" name="value">
+            <button type="submit" id="searchbtn">Search</button>
+        </form>
+        <div class="login" id="cartsetup">
+            <a href="/cart">
+                <div class="cart2">
+                    <img src="/images/shoping_cart.png" alt="cart" class="cartimage">
+                </div>
+            </a>
+            <a href="/cart" class="cart">
+                <div>
+                    <p class="cartbtn1">
+                        Cart
+                    </p>
+                </div>
+            </a>
+            <a href="/profile" class="cart">
+                <p class="cartbtn1" id="profilesetup">Profile</p>
+            </a>
+            {{!-- become a seller option --}}
+            {{!-- <a href="/sell_form_vendor_details" class="cart">
+                <p class="cartbtn1" id="sellerbtn">Become a seller</p>
+            </a> --}}
+        </div>
+    </header>
+    <section class="buy">
+        {{#each cartproducts}}
+        <div class="items" id="one{{@index}}">
+            <img src="images/db/{{this.image}}" alt="Product image" height="300px" width="300px" class="img">
+            <div class="about">
+                <h2 class="data" id="check{{@index}}">
+                    {{this.product_name}}
+                </h2>
+                <div id="id{{@index}}">{{this._id}}</div>
+                <h4 class="data">
+                    Company: {{this.company}}
+                </h4>
+                <p class="data content">
+                    {{this.about_item}}
+                </p>
+                <p id="count{{@index}}">
+                    Number of products : {{this.count}}
+                </p>
+                <div class="price ">
+                    <h2 style="display: inline;" id="idprice{{@index}}">
+                        ₹ {{this.price}}
+                    </h2>
+                    <a href="#">
+                        <button class="rentbtn">Rent at 10% price</button>
+                    </a>
+                </div>
+            </div>
+            <div class="option">
+                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px"
+                        width="140px"></a>
+                <a href="#one{{@index}}" class="removefromcart" id="cart{{@index}}">Remove from Cart</a>
+            </div>
+        </div>
+        {{/each}}
+    </section>
+    <div class="upperbox">
+        <div class="totalprice">
+            <div class="text">Total Price : </div>
+            <div class="totprice" id="totalpric">{{totalprice}}</div>
+        </div>
+    </div>
+    <div class="buyall">
+        <div class="buybutton btn btn-dark"><a href="#">Buy All</a></div>
+    </div>
+    <div id="length">{{length}}</div>
+    <hr>
+    <div class="footer-basic">
+        <footer>
+            <div class="icons">
+                <a href="https://www.facebook.com/" class="sociallogos" target="_blank"><img src="images/facebook.png"
+                        alt="facebook" width="2.5%"></a>
+                <a href="https://www.instagram.com" class="sociallogos" target="_blank"><img src="/images/instagram.png"
+                        alt="instagram" width="2.5%"></a>
+                <a href="https://www.twitter.com" class="sociallogos" target="_blank"><img src="/images/twitter.png"
+                        alt="twitter" width="2.5%"></a>
+                <a href="https://www.linkedin.com" class="sociallogos" target="_blank"><img src="/images/linkedin.png"
+                        alt="linkedin" width="2.5%"></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">SmiFe © 2023</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="javascript/cart.js"></script>
+</body>
+
+</html>

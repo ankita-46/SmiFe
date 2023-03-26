@@ -34,3 +34,23 @@ if(check4.innerText=="")
 {
     five.style.display="none";
 }
+
+let selector = "cart";
+let res = "#check"
+for(let i=0;i<5;i++)
+{
+    let num = i;
+    let text = num.toString();
+    let finalselector = "#"+selector+text;
+    let finalres = res+text;
+    // console.log(finalselector);
+    let element = document.querySelector(finalselector);
+    element.addEventListener('click',async function(e){
+        e.preventDefault();
+        let checked = document.querySelector(finalres);
+        let productname = checked.innerText;
+        // console.log(productname);
+        let resp =  await axios.post('/buy',{productname});
+        console.log(resp);
+    })
+}

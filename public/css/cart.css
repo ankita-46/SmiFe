@@ -1,0 +1,49 @@
+.upperbox{
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.totalprice{
+    font-size: 1.5rem;
+    font-weight: 500;
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.buybutton{
+    margin: 2rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-decoration: none;
+    color: white;
+    width: 15rem;
+    border: 1px solid black;
+    border-radius: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buyall{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buybutton a{
+    text-decoration: none;
+    color: white;
+}
+.removefromcart{
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+}
+.removefromcart:hover{
+    text-decoration: none;
+    color: rgb(54, 53, 53);
+    font-size: 1.4rem;
+}
