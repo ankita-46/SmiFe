@@ -1,27 +1,24 @@
 .login {
+    width: 20%;
     display: flex;
-}
-
-#profilesetup {
-    padding-left: 20px;
-}
-
-#cartsetup {
-    left: 1100px;
+    height: 2em;
+    margin-right: -5rem;
 }
 
 .cartimage {
-    width: 40px;
+    width: 26px;
 }
-
+.cart{
+    display: flex;
+    justify-content: space-around;
+}
 .cartbtn1 {
     height: 40px;
     width: 60px;
     background-color: black;
     color: white;
     border: none;
-    padding-left: 0px;
-    padding-top: 5px;
+    margin: 4px 0px;
 }
 
 .cart:hover {
@@ -57,7 +54,6 @@
 }
 
 #sellerbtn{
-    width: 61px;
-    margin-left: 50px;
-    padding: 6px
+        margin: 4px 1vw;
+    width: 73px;
 }

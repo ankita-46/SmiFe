@@ -15,42 +15,37 @@
 </head>
 
 <body>
-    <div class="container-fluid header">
-        <div class="row">
-            <div class="col-12">
-                <header>
-                    <a href="/home" id="logolink" class="logo">
-                        <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
-                        <div id="logo">SmiFe</div>
-                    </a>
-                    <form action="/search" method="POST" class="search">
-                        <input type="text" placeholder="Search for products, shops and more" id="searchtab"
-                            name="value">
-                        <button type="submit" id="searchbtn">Search</button>
-                    </form>
-                    <div class="login" id="cartsetup">
-                        <a href="/cart">
-                            <div class="cart2">
-                                <img src="images/shoping_cart.png" alt="cart" class="cartimage">
-                            </div>
-                        </a>
-                        <a href="/cart" class="cart">
-                            <div>
-                                <p class="cartbtn1">
-                                    Cart
-                                </p>
-                            </div>
-                        </a>
-                        <a href="/profile" class="cart">
-                            <p class="cartbtn1" id="profilesetup">Profile</p>
-                        </a>
-                        <a href="/logout" class="cart">
-                            <p class="cartbtn1" id="sellerbtn">Logout</p>
-                        </a>
-                    </div>
-                </header>
-            </div>
+    <header>
+        <a href="/home" id="logolink" class="logo">
+            <img src="images/logo.png" alt="" height="50px" width="70px" id="logopic">
+            <div id="logo">SmiFe</div>
+        </a>
+        <form action="/search" method="POST" class="search">
+            <input type="text" placeholder="Search for products, shops and more" id="searchtab" name="value">
+            <button type="submit" id="searchbtn">Search</button>
+        </form>
+        <div class="login" id="cartsetup">
+            <a href="/cart">
+                <div class="cart2">
+                    <img src="images/shoping_cart.png" alt="cart" class="cartimage">
+                </div>
+            </a>
+            <a href="/cart" class="cart">
+                <div>
+                    <p class="cartbtn1">
+                        Cart
+                    </p>
+                </div>
+            </a>
+            <a href="/profile" class="cart">
+                <p class="cartbtn1" id="profilesetup">Profile</p>
+            </a>
+            <a href="/logout" class="cart">
+                <p class="cartbtn1" id="sellerbtn">Logout</p>
+            </a>
         </div>
+    </header>
+    <div class="container-fluid header">
         <div class="row">
             <div class="col-12">
                 <h1 class="heading">Product Details</h1>

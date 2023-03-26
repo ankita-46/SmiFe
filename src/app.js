@@ -49,10 +49,16 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/login", (req, res) => {
-  if (user == undefined) res.render("login");
-  else {
+app.get("/login", async (req, res) => {
+  try {
+    if (user == undefined) {
+      user = await Last.findOne({ ip: ipAddress });
+      user = await User.findOne({ email: user.email });
+    }
     res.redirect("home");
+  } catch (error) {
+    user = undefined;
+    res.render("login");
   }
 });
 
@@ -309,11 +315,9 @@ app.get("/forgotpassword", async (req, res) => {
 
 app.get("/logout", async (req, res) => {
   user = undefined;
-  try{
+  try {
     await Last.deleteOne({ ip: ipAddress });
-  }
-  catch(error){
-  }
+  } catch (error) {}
   res.redirect("/");
 });
 //////////////////////UPDATE IT!!
