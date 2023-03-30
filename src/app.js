@@ -3,7 +3,7 @@ const path = require("path");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
 const IP = require("ip");
-
+const nodemailer = require("nodemailer");
 const app = express();
 require("./db/conn");
 
@@ -37,6 +37,14 @@ app.set("views", template_path);
 
 //all get API
 app.get("/", async (req, res) => {
+  forgotemail = "";
+  flag2 = false;
+  flag = false;
+  otp = -1;
+  signupobject = undefined;
+  signupotp = -1;
+  sflag = false;
+  lastobject = undefined;
   i = 0;
   try {
     if (user == undefined) {
@@ -51,6 +59,14 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/login", async (req, res) => {
+  forgotemail = "";
+  flag2 = false;
+  flag = false;
+  otp = -1;
+  signupobject = undefined;
+  signupotp = -1;
+  sflag = false;
+  lastobject = undefined;
   try {
     if (user == undefined) {
       user = await Last.findOne({ ip: ipAddress });
@@ -63,12 +79,37 @@ app.get("/login", async (req, res) => {
   }
 });
 
+let signupobject = undefined;
+let signupotp = -1;
+let sflag = false;
+let lastobject = undefined;
 app.get("/signups", (req, res) => {
-  if (user == undefined) res.render("signup");
+  forgotemail = "";
+  flag2 = false;
+  flag = false;
+  otp = -1;
+  signupobject = undefined;
+  signupotp = -1;
+  sflag = false;
+  if (user == undefined) res.render("signup", { signupoption: true });
   else {
     res.redirect("home");
   }
 });
+
+app.get('/resendsignupotp', function (req, res) {
+  if (sflag) {
+    signupotp = Math.floor(100000 + Math.random() * 900000);
+    sendmail(signupotp, signupobject.email);
+    res.render("signup", { signupotp: true, message: "otp sent" });
+  }
+  else{
+    signupobject = undefined;
+    signupotp = -1;
+    sflag = false;
+    res.render("signups", { signupoption: true});
+  }
+})
 
 app.get("/sell_form_product_details", async (req, res) => {
   i = 0;
@@ -101,6 +142,14 @@ app.get("/sell_form_vendor_details", async (req, res) => {
 });
 
 app.get("/home", async (req, res) => {
+  signupobject = undefined;
+  signupotp = -1;
+  sflag = false;
+  lastobject = undefined;
+  forgotemail = "";
+  flag2 = false;
+  flag = false;
+  otp = -1;
   i = 0;
   try {
     if (user == undefined) {
@@ -260,16 +309,15 @@ app.get("/cart", async (req, res) => {
       user = await Last.findOne({ ip: ipAddress });
       user = await User.findOne({ email: user.email });
     }
-    let allcartproducts = await cartProduct.find({email:user.email});
+    let allcartproducts = await cartProduct.find({ email: user.email });
     let totalprice = 0;
     let length = allcartproducts.length;
     // console.log(length);
-    for(let i = 0;i<length;i++)
-    {
-      totalprice = totalprice+(allcartproducts[i].price*allcartproducts[i].count);
+    for (let i = 0; i < length; i++) {
+      totalprice = totalprice + (allcartproducts[i].price * allcartproducts[i].count);
     }
     // console.log(allcartproducts);
-    res.render("cart",{cartproducts:allcartproducts,totalprice:totalprice,length:length});
+    res.render("cart", { cartproducts: allcartproducts, totalprice: totalprice, length: length });
   } catch (error) {
     user = undefined;
     res.redirect("/");
@@ -319,8 +367,13 @@ app.get("/profile", async (req, res) => {
   }
 });
 
+let forgotemail = "";
 app.get("/forgotpassword", async (req, res) => {
-  res.render("forgotpassword");
+  flag2 = false;
+  flag = false;
+  otp = -1;
+  forgotemail = "";
+  res.render("forgotpassword", { sendemail: true });
 });
 
 app.get("/logout", async (req, res) => {
@@ -330,14 +383,57 @@ app.get("/logout", async (req, res) => {
   } catch (error) { }
   res.redirect("/");
 });
+let flag2 = false;
+let flag = false;
+let otp = -1;
+app.get('/forgetpassword', function (req, res) {
+  if (flag) {
+    flag2 = false;
+    res.render("forgotpassword", { enterotp: true });
+  }
+  else {
+    flag = false;
+    flag2 = false;
+    res.render("forgotpassword", { sendemail: true });
+  }
+})
+app.get('/enterotp', function (req, res) {
+  if (flag) {
+    if (flag2) {
+      res.render("forgotpassword", { changepassword: true });
+    }
+    else {
+      res.render("forgotpassword", { enterotp: true });
+    }
+  }
+  else {
+    res.render("forgotpassword", { sendemail: true });
+  }
+})
+app.get('/resendotp', function (req, res) {
+  otp = Math.floor(100000 + Math.random() * 900000);
+  flag = true;
+  sendmail(otp, forgotemail);
+  res.render("forgotpassword", { enterotp: true });
+})
 //////////////////////UPDATE IT!!
-//app.get("*",(req, res) =>{
-//   res.render("error404")
-//})
+app.get("*", (req, res) => {
+  flag2 = false;
+  flag = false;
+  otp = -1;
+  res.render("error404")
+})
 
 //Create a new user in our database
-
+signupobject = undefined;
+signupotp = -1;
+sflag = false;
+lastobject = undefined;
 app.post("/signups", async (req, res) => {
+  forgotemail = "";
+  flag2 = false;
+  flag = false;
+  otp = -1;
   try {
     const password = req.body.password;
     const cpassword = req.body.confirm_password;
@@ -353,15 +449,21 @@ app.post("/signups", async (req, res) => {
         password: req.body.password,
         confirm_password: req.body.confirm_password,
       });
+      signupobject = registerUser;
       const lastu = new Last({
         email: req.body.email,
         ip: ipAddress,
       });
-      const registered = await registerUser.save();
-      const lu = await lastu.save();
-      user = registerUser;
-      res.status(201).redirect("home");
+      lastobject = lastu;
+      signupotp = Math.floor(100000 + Math.random() * 900000);
+      sflag = true;
+      sendmail(signupotp, req.body.email);
+      res.render("signup", { signupotp: true });
     } else {
+      signupobject = undefined;
+      signupotp = -1;
+      sflag = false;
+      lastobject = undefined;
       res.redirect("signups");
     }
   } catch (error) {
@@ -369,9 +471,35 @@ app.post("/signups", async (req, res) => {
   }
 });
 
+app.post('/entersignupotp', async function (req, res) {
+  if (sflag) {
+    let checksotp = req.body.otp;
+    if (signupotp == checksotp) {
+      const registered = await signupobject.save();
+      const lu = await lastobject.save();
+      user = signupobject;
+      res.status(201).redirect("home");
+    }
+    else {
+      res.render('signup', { message: "Enter OTP again", signupotp: true });
+    }
+  }
+  else {
+    signupobject = undefined;
+    signupotp = -1;
+    sflag = false;
+    lastobject = undefined;
+    res.redirect("signups");
+  }
+})
+
 //login
 
 app.post("/login", async (req, res) => {
+  forgotemail = "";
+  flag2 = false;
+  flag = false;
+  otp = -1;
   try {
     const email = req.body.email;
     const password = req.body.password;
@@ -584,6 +712,111 @@ app.post('/removefromcart', async function (req, res) {
     res.redirect("cart");
   }
 })
+
+app.post('/forgetpassword', async (req, res) => {
+  let emailentered = req.body.email;
+  if (emailentered != '') {
+    forgotemail = emailentered;
+    let founduser = await User.findOne({ email: emailentered });
+    if (founduser) {
+      otp = Math.floor(100000 + Math.random() * 900000);
+      flag = true;
+      sendmail(otp, emailentered);
+      res.render("forgotpassword", { enterotp: true });
+    }
+    else {
+      flag = false;
+      res.render("forgotpassword", { sendemail: true, message: "email does not exist" });
+    }
+  }
+  else {
+    flag = false;
+    res.render("forgotpassword", { sendemail: true });
+  }
+})
+
+
+app.post('/enterotp', async (req, res) => {
+  if (flag) {
+    let checkotp = req.body.otp;
+    checkotp = Number(checkotp);
+    if (otp == checkotp) {
+      flag2 = true;
+      res.render("forgotpassword", { changepassword: true });
+    }
+    else {
+      flag2 = false;
+      res.render("forgotpassword", { enterotp: true, message: "Incorrect OTP , Enter OTP again" });
+    }
+  }
+  else {
+    flag = false;
+    flag2 = false;
+    res.render("forgotpassword", { sendemail: true });
+  }
+})
+
+app.post('/changepassword', async (req, res) => {
+  if (flag2) {
+    let pss = req.body.newpassword;
+    let cpss = req.body.confirm_password;
+    if (pss == cpss) {
+      var myquery = { email: forgotemail };
+      var newvalues = {
+        $set: {
+          password: pss,
+          confirm_password: cpss
+        }
+      };
+      let result = await User.updateOne(myquery, newvalues);
+      flag2 = false;
+      flag = false;
+      otp = -1;
+      // console.log(result);
+      res.redirect("login");
+    }
+    else {
+      res.render("forgotpassword", { changepassword: true, message: "Password is not matching" });
+    }
+  }
+  else {
+    res.render("forgotpassword", { sendemail: true });
+  }
+})
+
 app.listen(port, () => {
   console.log(`server is running at port no ${port}`);
 });
+
+
+async function sendmail(otp, email) {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: 'SmiFe2023178909@gmail.com',
+        pass: 'fiheqhpgcqelqoct'
+      }
+    });
+    const mailOptions = {
+      from: 'SmiFe2023178909@gmail.com',
+      to: email,
+      subject: 'Reset Password',
+      html: '<h1>From SmiFe</h1><h2>Forget Password OTP</h2><h3>' + otp.toString() + '</h3>'
+    }
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      }
+      else {
+        console.log("Email has been sent");
+      }
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+}

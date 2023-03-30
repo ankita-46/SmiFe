@@ -40,6 +40,15 @@ body {
     height: 30rem;
 }
 
+.otpsignup {
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    text-align: center;
+    width: 450px;
+    border-radius: 10px;
+    height: 13rem;
+}
+
 .input {
     margin: 10px 4px;
     width: 200px;
@@ -71,7 +80,7 @@ button:hover {
     cursor: pointer;
 }
 
-#warning{
+#warning {
     margin: 0;
     padding: 0;
     font-size: .9rem;

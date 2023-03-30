@@ -19,24 +19,43 @@
             <img src="images/logo.png" alt="" height="100px" width="100px" id="logopic">
             <div id="logo">SmiFe</div>
         </a>
+        {{#if signupoption}}
         <div class="form">
             <h1 style="text-align: center; color: black; font-family: serif; padding-top: 15px ;">SIGNUP</h1>
             <form action="/signups" method="POST" class="inputform">
-                <div class="inputBlocks"><input type="text" name="first_name" class="input" placeholder="First Name"></div>
-                <div class="inputBlocks"><input type="text" name="last_name" class="input" placeholder="Last Name"></div>
+                <div class="inputBlocks"><input type="text" name="first_name" class="input" placeholder="First Name">
+                </div>
+                <div class="inputBlocks"><input type="text" name="last_name" class="input" placeholder="Last Name">
+                </div>
                 <div class="inputBlocks"><input type="number" name="age" class="input" placeholder="Age"></div>
 
-                <div class="inputBullet"> <input type="radio" name="gender" value ="male"> Male     
-                <input type="radio" name="gender" value ="female"> Female </div>
+                <div class="inputBullet"> <input type="radio" name="gender" value="male"> Male
+                    <input type="radio" name="gender" value="female"> Female
+                </div>
 
                 <div class="inputBlocks"><input type="number" name="phone" class="input" placeholder="Mobile"></div>
                 <div class="inputBlocks"><input type="email" name="email" class="input" placeholder="E-mail"></div>
-                <div class="inputBlocks"><input type="password" name="password" class="input" placeholder="Password" id="pass" onkeyup="verify()"></div>
-                <div class="inputBlocks"><input type="password" name="confirm_password" class="input" placeholder="Confirm Password" onkeyup="verify()" id="confirmpass"></div>
-                <div class="inputBlocks"><button type="submit" id = "submitBtn" >Submit</button> <button type="reset">Reset</button></div>
+                <div class="inputBlocks"><input type="password" name="password" class="input" placeholder="Password"
+                        id="pass" onkeyup="verify()"></div>
+                <div class="inputBlocks"><input type="password" name="confirm_password" class="input"
+                        placeholder="Confirm Password" onkeyup="verify()" id="confirmpass"></div>
+                <div class="inputBlocks"><button type="submit" id="submitBtn">Submit</button> <button
+                        type="reset">Reset</button></div>
                 <div id="warning"></div>
             </form>
         </div>
+        {{/if}}
+        {{#if signupotp}}
+        <div class="otpsignup">
+            <h1 style="text-align: center; color: black; font-family: serif; padding-top: 15px ;">Enter OTP</h1>
+            <form action="/entersignupotp" method="POST" class="inputform">
+                <div class="inputBlocks"><input type="number" name="otp" class="input" placeholder="OTP"></div>
+                <div class="inputBlocks"><button type="submit" id="loginbtn">Verify Email</button></div>
+                <div class="inputBlocks"><a href="/resendsignupotp">Resend OTP</a></div>
+                <div class="inputBlocks" id="message">{{message}}</div>
+            </form>
+        </div>
+        {{/if}}
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
@@ -49,10 +68,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        
+
     <script src="javascript/signup.js"></script>
 
-       
+
 </body>
 
 </html>
