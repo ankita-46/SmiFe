@@ -100,7 +100,7 @@ app.get("/signups", (req, res) => {
 app.get('/resendsignupotp', function (req, res) {
   if (sflag) {
     signupotp = Math.floor(100000 + Math.random() * 900000);
-    sendmail(signupotp, signupobject.email);
+    sendmail(signupotp, signupobject.email,'Reset Password','Forgot Password');
     res.render("signup", { signupotp: true, message: "otp sent" });
   }
   else{
@@ -413,7 +413,7 @@ app.get('/enterotp', function (req, res) {
 app.get('/resendotp', function (req, res) {
   otp = Math.floor(100000 + Math.random() * 900000);
   flag = true;
-  sendmail(otp, forgotemail);
+  sendmail(otp, forgotemail,'Email Verification','Email Verification');
   res.render("forgotpassword", { enterotp: true });
 })
 //////////////////////UPDATE IT!!
@@ -457,7 +457,7 @@ app.post("/signups", async (req, res) => {
       lastobject = lastu;
       signupotp = Math.floor(100000 + Math.random() * 900000);
       sflag = true;
-      sendmail(signupotp, req.body.email);
+      sendmail(signupotp, req.body.email,'Email Verification','Email Verification');
       res.render("signup", { signupotp: true });
     } else {
       signupobject = undefined;
@@ -669,9 +669,9 @@ app.post('/buy', async function (req, res) {
   let data = req.body;
   if (req.body.productname) {
     let pr = req.body.productname;
-    let checkforprod = await cartProduct.find({ product_name: pr });
+    let checkforprod = await cartProduct.find({ product_name: pr , email:user.email});
     if (checkforprod.length) {
-      let updatedproducts = await cartProduct.updateMany({ product_name: pr }, { $inc: { count: 1 } });
+      let updatedproducts = await cartProduct.updateMany({ product_name: pr ,email:user.email}, { $inc: { count: 1 } });
     }
     else {
       let productstobeinserted = await Product.find({ product_name: pr });
@@ -701,14 +701,14 @@ app.post('/buy', async function (req, res) {
 
 app.post('/removefromcart', async function (req, res) {
   // console.log(req.body);
-  let obj = await cartProduct.findOne({ _id: req.body.productid });
+  let obj = await cartProduct.findOne({ _id: req.body.productid,email:user.email });
   if (obj.count == 1) {
-    let deletedobj = await cartProduct.findOneAndDelete({ _id: req.body.productid });
+    let deletedobj = await cartProduct.findOneAndDelete({ _id: req.body.productid,email:user.email });
     res.redirect("cart");
     // console.log(deletedobj);
   }
   else {
-    let updatedobj = await cartProduct.updateOne({ _id: req.body.productid }, { $inc: { count: -1 } })
+    let updatedobj = await cartProduct.updateOne({ _id: req.body.productid,email:user.email }, { $inc: { count: -1 } })
     res.redirect("cart");
   }
 })
@@ -721,7 +721,7 @@ app.post('/forgetpassword', async (req, res) => {
     if (founduser) {
       otp = Math.floor(100000 + Math.random() * 900000);
       flag = true;
-      sendmail(otp, emailentered);
+      sendmail(otp, emailentered,'Reset Password','Forgot Password');
       res.render("forgotpassword", { enterotp: true });
     }
     else {
@@ -789,7 +789,7 @@ app.listen(port, () => {
 });
 
 
-async function sendmail(otp, email) {
+async function sendmail(otp, email,subject,bodystring) {
   try {
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -804,15 +804,15 @@ async function sendmail(otp, email) {
     const mailOptions = {
       from: 'SmiFe2023178909@gmail.com',
       to: email,
-      subject: 'Reset Password',
-      html: '<h1>From SmiFe</h1><h2>Forget Password OTP</h2><h3>' + otp.toString() + '</h3>'
+      subject: subject,
+      html: '<h1>From SmiFe</h1><h2>'+bodystring+' OTP</h2><h3>' + otp.toString() + '</h3>'
     }
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
       }
       else {
-        console.log("Email has been sent");
+        // console.log("Email has been sent");
       }
     });
 
