@@ -3,9 +3,20 @@ const path = require("path");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
 const IP = require("ip");
+const paypal = require("paypal-rest-sdk");
 
 const app = express();
 require("./db/conn");
+
+ //PAYPAL
+paypal.configure({
+  mode: "sandbox", //sandbox or live
+  client_id:
+    "Ad3bpvG7gO8ZN7Ti9DCXtjzGnaZbj9vWa9-GdPSJQsSRmwbuq8axTQw3FhucgvkbMUnTsl47qP7ltwyk",
+  client_secret:
+    "EFlTBDJwU2OrOxBto__FV4N8wDw35a_Nf3pvTVIHbIQz3Hf6sqGo3PIkVgfBHnpzvY_zIEqPMbyxW1fh",
+});
+
 
 /*--------models-------- */
 const User = require("./models/signups");
@@ -13,6 +24,7 @@ const Product = require("./models/products");
 const Vendor = require("./models/vendor_details");
 const Last = require("./models/lastuser");
 const cartProduct = require("./models/cartuser");
+const Order = require("./models/orders");
 
 const { json } = require("express");
 const { default: mongoose } = require("mongoose");
@@ -27,6 +39,7 @@ let user = undefined;
 let i = 0;
 let total_products = 0;
 let prod = [];
+let totalprice = 0;
 
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -151,6 +164,7 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
       };
     } else if (i == total_products - 2) {
       values = {
@@ -160,12 +174,14 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
         img1: prod[i + 1].image,
         product_name1: prod[i + 1].product_name,
         company_name1: prod[i + 1].company,
         about_item1: prod[i + 1].about_item,
         search_tag1: [i + 1].tags,
         rate1: prod[i + 1].price,
+        product_id1: prod[i + 1]._id,
       };
     } else if (i == total_products - 3) {
       values = {
@@ -175,18 +191,21 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
         img1: prod[i + 1].image,
         product_name1: prod[i + 1].product_name,
         company_name1: prod[i + 1].company,
         about_item1: prod[i + 1].about_item,
         search_tag1: [i + 1].tags,
         rate1: prod[i + 1].price,
+        product_id1: prod[i + 1]._id,
         img2: prod[i + 2].image,
         product_name2: prod[i + 2].product_name,
         company_name2: prod[i + 2].company,
         about_item2: prod[i + 2].about_item,
         search_tag2: prod[i + 2].tags,
         rate2: prod[i + 2].price,
+        product_id2: prod[i + 2]._id,
       };
     } else if (i == total_products - 4) {
       values = {
@@ -196,24 +215,28 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
         img1: prod[i + 1].image,
         product_name1: prod[i + 1].product_name,
         company_name1: prod[i + 1].company,
         about_item1: prod[i + 1].about_item,
         search_tag1: [i + 1].tags,
         rate1: prod[i + 1].price,
+        product_id1: prod[i + 1]._id,
         img2: prod[i + 2].image,
         product_name2: prod[i + 2].product_name,
         company_name2: prod[i + 2].company,
         about_item2: prod[i + 2].about_item,
         search_tag2: prod[i + 2].tags,
         rate2: prod[i + 2].price,
+        product_id2: prod[i + 2]._id,
         img3: prod[i + 3].image,
         product_name3: prod[i + 3].product_name,
         company_name3: prod[i + 3].company,
         about_item3: prod[i + 3].about_item,
         search_tag3: prod[i + 3].tags,
         rate3: prod[i + 3].price,
+        product_id3: prod[i + 3]._id,
       };
     } else {
       values = {
@@ -223,30 +246,35 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
         img1: prod[i + 1].image,
         product_name1: prod[i + 1].product_name,
         company_name1: prod[i + 1].company,
         about_item1: prod[i + 1].about_item,
         search_tag1: [i + 1].tags,
         rate1: prod[i + 1].price,
+        product_id1: prod[i + 1]._id,
         img2: prod[i + 2].image,
         product_name2: prod[i + 2].product_name,
         company_name2: prod[i + 2].company,
         about_item2: prod[i + 2].about_item,
         search_tag2: prod[i + 2].tags,
         rate2: prod[i + 2].price,
+        product_id2: prod[i + 2]._id,
         img3: prod[i + 3].image,
         product_name3: prod[i + 3].product_name,
         company_name3: prod[i + 3].company,
         about_item3: prod[i + 3].about_item,
         search_tag3: prod[i + 3].tags,
         rate3: prod[i + 3].price,
+        product_id3: prod[i + 3]._id,
         img4: prod[i + 4].image,
         product_name4: prod[i + 4].product_name,
         company_name4: prod[i + 4].company,
         about_item4: prod[i + 4].about_item,
         search_tag4: prod[i + 4].tags,
         rate4: prod[i + 4].price,
+        product_id4: prod[i + 4]._id,
       };
     }
     res.render("buy", values);
@@ -261,7 +289,7 @@ app.get("/cart", async (req, res) => {
       user = await User.findOne({ email: user.email });
     }
     let allcartproducts = await cartProduct.find({email:user.email});
-    let totalprice = 0;
+    totalprice = 0;
     let length = allcartproducts.length;
     // console.log(length);
     for(let i = 0;i<length;i++)
@@ -584,6 +612,181 @@ app.post('/removefromcart', async function (req, res) {
     res.redirect("cart");
   }
 })
+
+//paypal payment integration
+
+app.post("/pay", async (req, res) => {
+   console.log(req.body)
+  let { productid } = req.body;
+  //Handle buy now option 
+  if (productid) {
+    const product = await Product.findById(productid);
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+
+    const lineItems = [
+      {
+        name: product.product_name,
+        price: product.price.toFixed(2),
+        currency: "USD",
+        quantity: 1,
+      },
+    ];
+
+    const create_payment_json = {
+      intent: "sale",
+      payer: {
+        payment_method: "paypal",
+      },
+      redirect_urls: {
+        return_url: "http://localhost:3000/success",
+        cancel_url: "http://localhost:3000/cancel",
+      },
+      transactions: [
+        {
+          item_list: {
+            items: lineItems,
+          },
+          amount: {
+            currency: "USD",
+            total: product.price.toFixed(2),
+          },
+          description: product.about_item,
+        },
+      ],
+    };
+
+    // Create payment for a specific product
+    paypal.payment.create(create_payment_json, function (error, payment) {
+      if (error) {
+        throw error;
+      } else {
+        for (let i = 0; i < payment.links.length; i++) {
+          if (payment.links[i].rel === "approval_url") {
+            res.redirect(payment.links[i].href);
+          }
+        }
+      }
+    });
+  }
+  else{
+    //Handle cart payments
+    const cartItems = await cartProduct.find({ email: user.email });
+    let lineItems = [];
+    if (cartItems.length == 0) 
+    {
+      res.redirect("home");
+    }
+    else{
+  const lineItems = cartItems.map(item => ({
+  name: item.product_name,
+  price: item.price.toFixed(2),
+  currency: 'USD',
+  quantity: item.count,
+}));
+  const create_payment_json = {
+    intent: "sale",
+    payer: {
+      payment_method: "paypal",
+    },
+    redirect_urls: {
+      return_url: "http://localhost:3000/success",
+      cancel_url: "http://localhost:3000/cancel",
+    },
+    transactions: [
+      {
+        item_list: {
+          items: lineItems,
+        },
+        amount: {
+          currency: "USD",
+          total: totalprice.toFixed(2),
+        },
+        description: "Hat for the best team ever",
+      },
+    ],
+  };
+
+  paypal.payment.create(create_payment_json, function (error, payment) {
+    if (error) {
+      throw error;
+    } else {
+      for (let i = 0; i < payment.links.length; i++) {
+        if (payment.links[i].rel === "approval_url") {
+          res.redirect(payment.links[i].href);
+        }
+      }
+    }
+  });
+}}});
+
+//success route
+app.get("/success", (req, res) => {
+  const payerId = req.query.PayerID;
+  const paymentId = req.query.paymentId;
+
+  const execute_payment_json = {
+    payer_id: payerId,
+    transactions: [
+      {
+        amount: {
+          currency: "USD",
+          total: totalprice.toFixed(2),
+        },
+      },
+    ],
+  };
+
+  paypal.payment.execute(paymentId, execute_payment_json, async function (error, payment) {
+    if (error) {
+      console.log(error.response);
+      throw error;
+    } else {
+      // console.log(JSON.stringify(payment));
+      const shippingAddress = payment.payer.payer_info.shipping_address;
+      console.log(shippingAddress);
+
+      // Store order details in the database
+      const cartItems = await cartProduct.find({ email: user.email });
+
+      const orderItems = cartItems.map(item => ({
+        name: item.product_name,
+        price: item.price,
+        quantity: item.count,
+      }));
+
+      const order = {
+        paymentId,
+        payerId,
+        items: orderItems,
+        total: totalprice,
+        address: {
+          recipientName: shippingAddress.recipient_name,
+          addressLine1: shippingAddress.line1,
+          city: shippingAddress.city,
+          state: shippingAddress.state,
+          country: shippingAddress.country_code,
+          postalCode: shippingAddress.postal_code,
+        },
+      };
+      console.log(order)
+
+      // Save the order in the database
+      await Order.create(order);
+      await cartProduct.deleteMany({ email: user.email });
+
+      res.render("success")
+      }
+  }
+  );
+});
+
+app.get("/cancel", async (req, res) => {
+  res.render("cancel");
+});
+
+
 app.listen(port, () => {
   console.log(`server is running at port no ${port}`);
 });

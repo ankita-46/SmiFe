@@ -72,7 +72,11 @@
                 </div>
             </div>
             <div class="option">
-                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <form action="/pay" method="post" id="payform0">
+                <input type="hidden" name="productid" value="{{product_id0}}">
+                <img id="paybtn0" class="buyoption" src="images/buynow.jfif" alt="Buy Now" height="140px"
+                        width="140px">
+                        </form>
                 <a href="#" class="buyoption" id="cart0"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
             </div>
         </div>
@@ -101,7 +105,11 @@
                 </div>
             </div>
             <div class="option">
-                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <form action="/pay" method="post" id="payform1">
+                <input type="hidden" name="productid" value="{{product_id1}}">
+                <img id="paybtn1" class="buyoption" src="images/buynow.jfif" alt="Buy Now" height="140px"
+                        width="140px">
+                        </form>
                 <a href="#" class="buyoption" id="cart1"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
             </div>
         </div>
@@ -130,7 +138,11 @@
                 </div>
             </div>
             <div class="option">
-                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+               <form action="/pay" method="post" id="payform2">
+                <input type="hidden" name="productid" value="{{product_id2}}">
+                <img id="paybtn2" class="buyoption" src="images/buynow.jfif" alt="Buy Now" height="140px"
+                        width="140px">
+                        </form>
                 <a href="#" class="buyoption" id="cart2"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
             </div>
         </div>
@@ -159,7 +171,11 @@
                 </div>
             </div>
             <div class="option">
-                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <form action="/pay" method="post" id="payform3">
+                <input type="hidden" name="productid" value="{{product_id3}}">
+                <img id="paybtn3" class="buyoption" src="images/buynow.jfif" alt="Buy Now" height="140px"
+                        width="140px">
+                        </form>
                 <a href="#" class="buyoption" id="cart3"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
             </div>
         </div>
@@ -188,7 +204,11 @@
                 </div>
             </div>
             <div class="option">
-                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px" width="140px"></a>
+                <form action="/pay" method="post" id="payform4">
+                <input type="hidden" name="productid" value="{{product_id4}}">
+                <img id="paybtn4" class="buyoption" src="images/buynow.jfif" alt="Buy Now" height="140px"
+                        width="140px">
+                        </form>
                 <a href="#" class="buyoption" id="cart4"><img src="images/addtocart.jpg" alt="Add to cart" height="140px" width="140px"></a>
             </div>
         </div>
@@ -236,6 +256,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="javascript/buy.js"></script>
+    <script src="javascript/cartPay.js"></script>
 </body>
 
 </html>

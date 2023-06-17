@@ -75,8 +75,10 @@
                 </div>
             </div>
             <div class="option">
-                <a href="#" class="buyoption"><img src="images/buynow.jfif" alt="Buy Now" height="140px"
-                        width="140px"></a>
+                 <form action="/pay" method="post" id="payform">
+                <img id="paybtn" class="buyoption" src="images/buynow.jfif" alt="Buy Now" height="140px"
+                        width="140px">
+                        </form>
                 <a href="#one{{@index}}" class="removefromcart" id="cart{{@index}}">Remove from Cart</a>
             </div>
         </div>
@@ -89,7 +91,9 @@
         </div>
     </div>
     <div class="buyall">
-        <div class="buybutton btn btn-dark"><a href="#">Buy All</a></div>
+        <form action="/pay" method="post">
+        <button type="submit" class="buybutton btn btn-dark">Check Out</button>
+        </form>
     </div>
     <div id="length">{{length}}</div>
     <hr>
@@ -127,6 +131,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="javascript/cart.js"></script>
+    <script src="javascript/cartPay.js"></script>
 </body>
 
 </html>
