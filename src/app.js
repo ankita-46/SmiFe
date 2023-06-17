@@ -3,9 +3,20 @@ const path = require("path");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
 const IP = require("ip");
-const nodemailer = require("nodemailer");
+const paypal = require("paypal-rest-sdk");
+
 const app = express();
 require("./db/conn");
+
+ //PAYPAL
+paypal.configure({
+  mode: "sandbox", //sandbox or live
+  client_id:
+    "Ad3bpvG7gO8ZN7Ti9DCXtjzGnaZbj9vWa9-GdPSJQsSRmwbuq8axTQw3FhucgvkbMUnTsl47qP7ltwyk",
+  client_secret:
+    "EFlTBDJwU2OrOxBto__FV4N8wDw35a_Nf3pvTVIHbIQz3Hf6sqGo3PIkVgfBHnpzvY_zIEqPMbyxW1fh",
+});
+
 
 /*--------models-------- */
 const User = require("./models/signups");
@@ -13,6 +24,7 @@ const Product = require("./models/products");
 const Vendor = require("./models/vendor_details");
 const Last = require("./models/lastuser");
 const cartProduct = require("./models/cartuser");
+const Order = require("./models/orders");
 
 const { json } = require("express");
 const { default: mongoose } = require("mongoose");
@@ -27,6 +39,7 @@ let user = undefined;
 let i = 0;
 let total_products = 0;
 let prod = [];
+let totalprice = 0;
 
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -200,6 +213,7 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
       };
     } else if (i == total_products - 2) {
       values = {
@@ -209,12 +223,14 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
         img1: prod[i + 1].image,
         product_name1: prod[i + 1].product_name,
         company_name1: prod[i + 1].company,
         about_item1: prod[i + 1].about_item,
         search_tag1: [i + 1].tags,
         rate1: prod[i + 1].price,
+        product_id1: prod[i + 1]._id,
       };
     } else if (i == total_products - 3) {
       values = {
@@ -224,18 +240,21 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
         img1: prod[i + 1].image,
         product_name1: prod[i + 1].product_name,
         company_name1: prod[i + 1].company,
         about_item1: prod[i + 1].about_item,
         search_tag1: [i + 1].tags,
         rate1: prod[i + 1].price,
+        product_id1: prod[i + 1]._id,
         img2: prod[i + 2].image,
         product_name2: prod[i + 2].product_name,
         company_name2: prod[i + 2].company,
         about_item2: prod[i + 2].about_item,
         search_tag2: prod[i + 2].tags,
         rate2: prod[i + 2].price,
+        product_id2: prod[i + 2]._id,
       };
     } else if (i == total_products - 4) {
       values = {
@@ -245,24 +264,28 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
         img1: prod[i + 1].image,
         product_name1: prod[i + 1].product_name,
         company_name1: prod[i + 1].company,
         about_item1: prod[i + 1].about_item,
         search_tag1: [i + 1].tags,
         rate1: prod[i + 1].price,
+        product_id1: prod[i + 1]._id,
         img2: prod[i + 2].image,
         product_name2: prod[i + 2].product_name,
         company_name2: prod[i + 2].company,
         about_item2: prod[i + 2].about_item,
         search_tag2: prod[i + 2].tags,
         rate2: prod[i + 2].price,
+        product_id2: prod[i + 2]._id,
         img3: prod[i + 3].image,
         product_name3: prod[i + 3].product_name,
         company_name3: prod[i + 3].company,
         about_item3: prod[i + 3].about_item,
         search_tag3: prod[i + 3].tags,
         rate3: prod[i + 3].price,
+        product_id3: prod[i + 3]._id,
       };
     } else {
       values = {
@@ -272,30 +295,35 @@ app.get("/buy", async (req, res) => {
         about_item0: prod[i + 0].about_item,
         search_tag0: prod[i + 0].tags,
         rate0: prod[i + 0].price,
+        product_id0: prod[i + 0]._id,
         img1: prod[i + 1].image,
         product_name1: prod[i + 1].product_name,
         company_name1: prod[i + 1].company,
         about_item1: prod[i + 1].about_item,
         search_tag1: [i + 1].tags,
         rate1: prod[i + 1].price,
+        product_id1: prod[i + 1]._id,
         img2: prod[i + 2].image,
         product_name2: prod[i + 2].product_name,
         company_name2: prod[i + 2].company,
         about_item2: prod[i + 2].about_item,
         search_tag2: prod[i + 2].tags,
         rate2: prod[i + 2].price,
+        product_id2: prod[i + 2]._id,
         img3: prod[i + 3].image,
         product_name3: prod[i + 3].product_name,
         company_name3: prod[i + 3].company,
         about_item3: prod[i + 3].about_item,
         search_tag3: prod[i + 3].tags,
         rate3: prod[i + 3].price,
+        product_id3: prod[i + 3]._id,
         img4: prod[i + 4].image,
         product_name4: prod[i + 4].product_name,
         company_name4: prod[i + 4].company,
         about_item4: prod[i + 4].about_item,
         search_tag4: prod[i + 4].tags,
         rate4: prod[i + 4].price,
+        product_id4: prod[i + 4]._id,
       };
     }
     res.render("buy", values);
@@ -712,78 +740,6 @@ app.post('/removefromcart', async function (req, res) {
     res.redirect("cart");
   }
 })
-
-app.post('/forgetpassword', async (req, res) => {
-  let emailentered = req.body.email;
-  if (emailentered != '') {
-    forgotemail = emailentered;
-    let founduser = await User.findOne({ email: emailentered });
-    if (founduser) {
-      otp = Math.floor(100000 + Math.random() * 900000);
-      flag = true;
-      sendmail(otp, emailentered,'Reset Password','Forgot Password');
-      res.render("forgotpassword", { enterotp: true });
-    }
-    else {
-      flag = false;
-      res.render("forgotpassword", { sendemail: true, message: "email does not exist" });
-    }
-  }
-  else {
-    flag = false;
-    res.render("forgotpassword", { sendemail: true });
-  }
-})
-
-
-app.post('/enterotp', async (req, res) => {
-  if (flag) {
-    let checkotp = req.body.otp;
-    checkotp = Number(checkotp);
-    if (otp == checkotp) {
-      flag2 = true;
-      res.render("forgotpassword", { changepassword: true });
-    }
-    else {
-      flag2 = false;
-      res.render("forgotpassword", { enterotp: true, message: "Incorrect OTP , Enter OTP again" });
-    }
-  }
-  else {
-    flag = false;
-    flag2 = false;
-    res.render("forgotpassword", { sendemail: true });
-  }
-})
-
-app.post('/changepassword', async (req, res) => {
-  if (flag2) {
-    let pss = req.body.newpassword;
-    let cpss = req.body.confirm_password;
-    if (pss == cpss) {
-      var myquery = { email: forgotemail };
-      var newvalues = {
-        $set: {
-          password: pss,
-          confirm_password: cpss
-        }
-      };
-      let result = await User.updateOne(myquery, newvalues);
-      flag2 = false;
-      flag = false;
-      otp = -1;
-      // console.log(result);
-      res.redirect("login");
-    }
-    else {
-      res.render("forgotpassword", { changepassword: true, message: "Password is not matching" });
-    }
-  }
-  else {
-    res.render("forgotpassword", { sendemail: true });
-  }
-})
-
 app.listen(port, () => {
   console.log(`server is running at port no ${port}`);
 });

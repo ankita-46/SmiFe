@@ -1,0 +1,53 @@
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .homebtn{
+      margin:auto;
+  }
+  .back{
+    text-decoration: none;
+    color: white;
+  }
+  button {
+      background-color: black;
+      width: 500px;
+      color: white;
+      padding: 20px;
+      margin: auto 150px;
+      font-size: 20px;
+      font-family: Arial, sans-serif;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-around;
+  }
+  button:hover {
+  cursor: pointer;
+  background-color: rgb(112, 110, 110);
+}
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .success-image {
+    display: block;
+    margin: 40px auto;
+    max-width: 300px;
+  }
+
+  .message {
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
