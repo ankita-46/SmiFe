@@ -3,6 +3,7 @@ const path = require("path");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
 const IP = require("ip");
+const nodemailer = require("nodemailer");
 const paypal = require("paypal-rest-sdk");
 
 const app = express();
@@ -337,8 +338,8 @@ app.get("/cart", async (req, res) => {
       user = await Last.findOne({ ip: ipAddress });
       user = await User.findOne({ email: user.email });
     }
-    let allcartproducts = await cartProduct.find({ email: user.email });
-    let totalprice = 0;
+    let allcartproducts = await cartProduct.find({email:user.email});
+    totalprice = 0;
     let length = allcartproducts.length;
     // console.log(length);
     for (let i = 0; i < length; i++) {
@@ -411,6 +412,7 @@ app.get("/logout", async (req, res) => {
   } catch (error) { }
   res.redirect("/");
 });
+
 let flag2 = false;
 let flag = false;
 let otp = -1;
@@ -445,12 +447,12 @@ app.get('/resendotp', function (req, res) {
   res.render("forgotpassword", { enterotp: true });
 })
 //////////////////////UPDATE IT!!
-app.get("*", (req, res) => {
-  flag2 = false;
-  flag = false;
-  otp = -1;
-  res.render("error404")
-})
+// app.get("*", (req, res) => {
+//   flag2 = false;
+//   flag = false;
+//   otp = -1;
+//   res.render("error404")
+// })
 
 //Create a new user in our database
 signupobject = undefined;
@@ -740,6 +742,248 @@ app.post('/removefromcart', async function (req, res) {
     res.redirect("cart");
   }
 })
+
+app.post('/forgetpassword', async (req, res) => {
+  let emailentered = req.body.email;
+  if (emailentered != '') {
+    forgotemail = emailentered;
+    let founduser = await User.findOne({ email: emailentered });
+    if (founduser) {
+      otp = Math.floor(100000 + Math.random() * 900000);
+      flag = true;
+      sendmail(otp, emailentered,'Reset Password','Forgot Password');
+      res.render("forgotpassword", { enterotp: true });
+    }
+    else {
+      flag = false;
+      res.render("forgotpassword", { sendemail: true, message: "email does not exist" });
+    }
+  }
+  else {
+    flag = false;
+    res.render("forgotpassword", { sendemail: true });
+  }
+})
+
+
+app.post('/enterotp', async (req, res) => {
+  if (flag) {
+    let checkotp = req.body.otp;
+    checkotp = Number(checkotp);
+    if (otp == checkotp) {
+      flag2 = true;
+      res.render("forgotpassword", { changepassword: true });
+    }
+    else {
+      flag2 = false;
+      res.render("forgotpassword", { enterotp: true, message: "Incorrect OTP , Enter OTP again" });
+    }
+  }
+  else {
+    flag = false;
+    flag2 = false;
+    res.render("forgotpassword", { sendemail: true });
+  }
+})
+
+app.post('/changepassword', async (req, res) => {
+  if (flag2) {
+    let pss = req.body.newpassword;
+    let cpss = req.body.confirm_password;
+    if (pss == cpss) {
+      var myquery = { email: forgotemail };
+      var newvalues = {
+        $set: {
+          password: pss,
+          confirm_password: cpss
+        }
+      };
+      let result = await User.updateOne(myquery, newvalues);
+      flag2 = false;
+      flag = false;
+      otp = -1;
+      // console.log(result);
+      res.redirect("login");
+    }
+    else {
+      res.render("forgotpassword", { changepassword: true, message: "Password is not matching" });
+    }
+  }
+  else {
+    res.render("forgotpassword", { sendemail: true });
+  }
+})
+
+//paypal payment integration
+
+app.post("/pay", async (req, res) => {
+ let { productid } = req.body;
+ //Handle buy now option 
+ if (productid) {
+   const product = await Product.findById(productid);
+   if (!product) {
+     return res.status(404).send("Product not found");
+   }
+
+   const lineItems = [
+     {
+       name: product.product_name,
+       price: product.price.toFixed(2),
+       currency: "USD",
+       quantity: 1,
+     },
+   ];
+   totalprice=product.price.toFixed(2);
+   const create_payment_json = {
+     intent: "sale",
+     payer: {
+       payment_method: "paypal",
+     },
+     redirect_urls: {
+       return_url: "http://localhost:3000/success",
+       cancel_url: "http://localhost:3000/cancel",
+     },
+     transactions: [
+       {
+         item_list: {
+           items: lineItems,
+         },
+         amount: {
+           currency: "USD",
+           total: product.price.toFixed(2),
+         },
+         description: product.about_item,
+       },
+     ],
+   };
+   // Create payment for a specific product
+   paypal.payment.create(create_payment_json, function (error, payment) {
+     if (error) {
+       throw error;
+     } else {
+       for (let i = 0; i < payment.links.length; i++) {
+         if (payment.links[i].rel === "approval_url") {
+           res.redirect(payment.links[i].href);
+         }
+       }
+     }
+   });
+ }
+ else{
+   //Handle cart payments
+   const cartItems = await cartProduct.find({ email: user.email });
+   let lineItems = [];
+   if (cartItems.length == 0) 
+   {
+     res.redirect("home");
+   }
+   else{
+ const lineItems = cartItems.map(item => ({
+ name: item.product_name,
+ price: item.price.toFixed(2),
+ currency: 'USD',
+ quantity: item.count,
+}));
+ const create_payment_json = {
+   intent: "sale",
+   payer: {
+     payment_method: "paypal",
+   },
+   redirect_urls: {
+     return_url: "http://localhost:3000/success",
+     cancel_url: "http://localhost:3000/cancel",
+   },
+   transactions: [
+     {
+       item_list: {
+         items: lineItems,
+       },
+       amount: {
+         currency: "USD",
+         total: totalprice.toFixed(2),
+       },
+       description: "Hat for the best team ever",
+     },
+   ],
+ };
+
+ paypal.payment.create(create_payment_json, function (error, payment) {
+   if (error) {
+     throw error;
+   } else {
+     for (let i = 0; i < payment.links.length; i++) {
+       if (payment.links[i].rel === "approval_url") {
+         res.redirect(payment.links[i].href);
+       }
+     }
+   }
+ });
+}}});
+
+//success route
+app.get("/success", (req, res) => {
+ const payerId = req.query.PayerID;
+ const paymentId = req.query.paymentId;
+  var pricetosubmit = totalprice;
+ const execute_payment_json = {
+   payer_id: payerId,
+   transactions: [
+     {
+       amount: {
+         currency: "USD",
+         total: totalprice,
+       },
+     },
+   ],
+ };
+ paypal.payment.execute(paymentId, execute_payment_json, async function (error, payment) {
+   if (error) {
+    console.log(1);
+     console.log(error.response);
+     throw error;
+   } else {
+     // console.log(JSON.stringify(payment));
+     const shippingAddress = payment.payer.payer_info.shipping_address;
+
+     // Store order details in the database
+     const cartItems = await cartProduct.find({ email: user.email });
+
+     const orderItems = cartItems.map(item => ({
+       name: item.product_name,
+       price: item.price,
+       quantity: item.count,
+     }));
+
+     const order = {
+       paymentId,
+       payerId,
+       items: orderItems,
+       total: totalprice,
+       address: {
+         recipientName: shippingAddress.recipient_name,
+         addressLine1: shippingAddress.line1,
+         city: shippingAddress.city,
+         state: shippingAddress.state,
+         country: shippingAddress.country_code,
+         postalCode: shippingAddress.postal_code,
+       },
+     };
+     console.log(order)
+
+     // Save the order in the database
+     await Order.create(order);
+     await cartProduct.deleteMany({ email: user.email });
+
+     res.render("success")
+     }
+ }
+ );
+});
+
+app.get("/cancel", async (req, res) => {
+ res.render("cancel");
+});
+
 app.listen(port, () => {
   console.log(`server is running at port no ${port}`);
 });
