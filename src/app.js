@@ -942,17 +942,28 @@ app.get("/success", (req, res) => {
      console.log(error.response);
      throw error;
    } else {
-     // console.log(JSON.stringify(payment));
+     //console.log(JSON.stringify(payment));
      const shippingAddress = payment.payer.payer_info.shipping_address;
-
+     const data = JSON.parse(JSON.stringify(payment));
      // Store order details in the database
      const cartItems = await cartProduct.find({ email: user.email });
-
-     const orderItems = cartItems.map(item => ({
+     let orderItems =[]
+     if (cartItems.length == 0) 
+     {
+      const items = data.transactions[0].item_list.items;
+      orderItems = items.map((item) => ({
+        name: item.name,
+        price: item.price,
+        quantity: 1,
+      }));
+     }
+     else{
+     orderItems = cartItems.map(item => ({
        name: item.product_name,
        price: item.price,
        quantity: item.count,
      }));
+    }
 
      const order = {
        paymentId,
