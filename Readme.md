@@ -13,7 +13,7 @@
 (https://github.com/Madhubrat1562)
 
 ### About project:-
-An E-commerce website is created in which blacksmiths of our country can sell and buy their products. This will help them advertise their product and get more customers. Consumers will get their products easily and quickly. 
+An E-commerce website is created in which blacksmiths can sell and buy their products. This will help them advertise their product and get more customers. Consumers will get their products easily and quickly. 
 
 ### Current Features:-
 
@@ -26,15 +26,16 @@ An E-commerce website is created in which blacksmiths of our country can sell an
 -Separate sections according to different categories\
 -Search filters according to various parameters\
 -Details listing of products or shops(images / videos)\
--Intergrate a payment gateway
+-Intergrated payment gateway
 
 ### Upcomming Features:-
 -Rating and comment about shops and items\
 -Rent the items\
 -Report shop/items\
 -User can view different stats for a product\
+-Delivery tracker
 
 ### Tech Stack
-* CLIENT:  HTML, CSS, JavaScript, bootStrap
-* BACKEND:  Node.js, Express
+* CLIENT:  Handlebars, CSS, JavaScript, BootStrap
+* BACKEND:  Node.js, Express.js
 * DATABASE:  MongoDB
