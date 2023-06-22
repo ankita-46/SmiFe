@@ -75,9 +75,10 @@
                 </div>
             </div>
             <div class="option">
-                 <form action="/pay" method="post" id="payform">
-                <img id="paybtn" class="buyoption" src="images/buynow.jfif" alt="Buy Now" height="140px"
-                        width="140px">
+                <form action="/pay" method="post" id="payform2">
+                <input type="hidden" name="productid" value="{{this._id}}">
+                <button type="submit" id="buyincart"><img id="paybtn2" class="buyoption" src="images/buynow.jfif" alt="Buy Now" height="140px"
+                        width="140px"></button>
                         </form>
                 <a href="#one{{@index}}" class="removefromcart" id="cart{{@index}}">Remove from Cart</a>
             </div>
@@ -131,7 +132,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="javascript/cart.js"></script>
-    <script src="javascript/cartPay.js"></script>
 </body>
 
 </html>

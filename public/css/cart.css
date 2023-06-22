@@ -49,3 +49,11 @@
     color: rgb(54, 53, 53);
     font-size: 1.4rem;
 }
+
+#buyincart{
+    background: none;
+    border: 0px;
+}
+#buyincart:focus{
+    outline: none;
+}
