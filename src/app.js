@@ -815,12 +815,17 @@ app.post('/changepassword', async (req, res) => {
 })
 
 //paypal payment integration
-
+let cartbuy;
 app.post("/pay", async (req, res) => {
+  cartbuy=false;
  let { productid } = req.body;
  //Handle buy now option 
- if (productid) {
-   const product = await Product.findById(productid);
+ if (productid) {// b cb
+   let product = await Product.findById(productid);
+   if(!product) //means buy from cart
+   {
+    product = await cartProduct.findById(productid);
+   }
    if (!product) {
      return res.status(404).send("Product not found");
    }
@@ -869,7 +874,7 @@ app.post("/pay", async (req, res) => {
      }
    });
  }
- else{
+ else{//c
    //Handle cart payments
    const cartItems = await cartProduct.find({ email: user.email });
    let lineItems = [];
@@ -878,6 +883,7 @@ app.post("/pay", async (req, res) => {
      res.redirect("home");
    }
    else{
+    cartbuy=true;
  const lineItems = cartItems.map(item => ({
  name: item.product_name,
  price: item.price.toFixed(2),
@@ -946,10 +952,16 @@ app.get("/success", (req, res) => {
      const shippingAddress = payment.payer.payer_info.shipping_address;
     const data = JSON.parse(JSON.stringify(payment));
      // Store order details in the database
-     const cartItems = await cartProduct.find({ email: user.email });
-     let orderItems =[]
-     if (cartItems.length == 0) 
-     {
+     let orderItems =[];
+     if(cartbuy){
+      const cartItems = await cartProduct.find({ email: user.email });
+      orderItems = cartItems.map(item => ({
+        name: item.product_name,
+        price: item.price,
+        quantity: item.count,
+      }));
+     }
+     else{
       const items = data.transactions[0].item_list.items;
       orderItems = items.map((item) => ({
         name: item.name,
@@ -957,13 +969,6 @@ app.get("/success", (req, res) => {
         quantity: 1,
       }));
      }
-     else{
-     orderItems = cartItems.map(item => ({
-       name: item.product_name,
-       price: item.price,
-       quantity: item.count,
-     }));
-    }
      const order = {
        paymentId,
        payerId,
@@ -982,6 +987,7 @@ app.get("/success", (req, res) => {
 
      // Save the order in the database
      await Order.create(order);
+     if(cartbuy)
      await cartProduct.deleteMany({ email: user.email });
 
      res.render("success")
