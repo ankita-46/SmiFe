@@ -50,7 +50,7 @@
     <section class="buy">
         {{#each cartproducts}}
         <div class="items" id="one{{@index}}">
-            <img src="images/db/{{this.image}}" alt="Product image" height="300px" width="300px" class="img">
+            <img src="{{this.image}}" alt="Product image" height="300px" width="300px" class="img">
             <div class="about">
                 <h2 class="data" id="check{{@index}}">
                     {{this.product_name}}

@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="col-6 ">
-                <form action="/sell_form_product_details" method="POST" class="form">
+                <form action="/sell_form_product_details" method="POST" class="form" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="" class="word1">Product Name</label>
                         <input type="text" name="product_name" class="form-control width-utility"
@@ -83,7 +83,7 @@
                         <label for="" class="word">Product Image</label>
                         <input type="file" name="image" accept="image/*" class="form-control-file width-utility color">
                     </div>
-                    <button type="submit" class="button">Submit</button>
+                    <button type="submit" value="submit"class="button">Submit</button>
                 </form>
             </div>
         </div>

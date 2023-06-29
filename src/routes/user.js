@@ -278,7 +278,7 @@ var productFormPost = async (req, res, variables) => {
       price: req.body.price,
       about_item: req.body.about_item,
       tags: req.body.tags.toLowerCase(),
-      image: req.body.image,
+      image: req.file.path.substring(7),
     });
     const added_Product = await addProduct.save();
     res.status(201).redirect("home");

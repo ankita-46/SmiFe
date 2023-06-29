@@ -13,7 +13,7 @@
 (https://github.com/Madhubrat1562)
 
 ### About project:-
-An E-commerce website is created in which blacksmiths can sell and buy their products. This will help them advertise their product and get more customers. Consumers will get their products easily and quickly. 
+An E-commerce website is created in which blacksmiths can sell their products. This will help them advertise their product and get more customers. Consumers will get their products easily and quickly. 
 
 ### Video Link:-
 https://drive.google.com/drive/folders/1JI7OjOYDvKetWslG-uo1aQbe3IkwPjAT

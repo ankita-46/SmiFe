@@ -4,11 +4,35 @@ const hbs = require("hbs");
 const bodyParser = require("body-parser");
 const IP = require("ip");
 const paypal = require("paypal-rest-sdk");
+const multer  = require('multer');
 
-var {index, login, signup, resendSignupOTP, forgetPassword, forgetPasswordPost, enterotpPost, enterotp, resendotp, signupPost, entersignupotpPost} = require("./functions/index");
-var {pay, success, cancel} = require("./functions/payment");
-var {home, vendorDetailsForm, profile, productForm, logout, forgotPassword, changePasswordPost, removefromcartPost, search, productFormPost, profilePost, vendorDetailsFormPost, loginPost} = require("./functions/user");
-var {buy, buyOption, cart, buyPost, prev, next} = require("./functions/purchasing");
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      return cb(null, './public/images/db');
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      return cb(null, `${uniqueSuffix}-${file.originalname}`);
+    }
+})
+
+const filter = function(req, file, cb){
+  if(file.mimetype.startsWith("image")){
+      cb(null, true);
+  }else{
+      cb(new Error("Not an Image! Please upload an image"));
+  }
+}
+
+const upload = multer({  storage: storage,
+  fileFilter: filter,
+  limits: { fileSize: 1024 * 1024 * 10}  
+})
+
+var {index, login, signup, resendSignupOTP, forgetPassword, forgetPasswordPost, enterotpPost, enterotp, resendotp, signupPost, entersignupotpPost} = require("./routes/index");
+var {pay, success, cancel} = require("./routes/payment");
+var {home, vendorDetailsForm, profile, productForm, logout, forgotPassword, changePasswordPost, removefromcartPost, search, productFormPost, profilePost, vendorDetailsFormPost, loginPost} = require("./routes/user");
+var {buy, buyOption, cart, buyPost, prev, next} = require("./routes/purchasing");
 
 const app = express();
 require("./db/conn");
@@ -146,7 +170,7 @@ app.post("/login", (req, res)=>{
   loginPost(req, res, variables);
 });
 
-app.post("/sell_form_product_details", (req, res)=>{
+app.post("/sell_form_product_details", upload.single("image"), (req, res)=>{
   productFormPost(req, res, variables);
 });
 
